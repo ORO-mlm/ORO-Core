@@ -1,0 +1,37 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/oro_bg.qm</file>
+        <file alias="ca">locale/oro_ca.qm</file>
+        <file alias="cs">locale/oro_cs.qm</file>
+        <file alias="da">locale/oro_da.qm</file>
+        <file alias="de">locale/oro_de.qm</file>
+        <file alias="en">locale/oro_en.qm</file>
+        <file alias="en_GB">locale/oro_en_GB.qm</file>
+        <file alias="en_US">locale/oro_en_US.qm</file>
+        <file alias="eo">locale/oro_eo.qm</file>
+        <file alias="es">locale/oro_es.qm</file>
+        <file alias="es_ES">locale/oro_es_ES.qm</file>
+        <file alias="fi">locale/oro_fi.qm</file>
+        <file alias="fr_FR">locale/oro_fr_FR.qm</file>
+        <file alias="hi_IN">locale/oro_hi_IN.qm</file>
+        <file alias="hr">locale/oro_hr.qm</file>
+        <file alias="hr_HR">locale/oro_hr_HR.qm</file>
+        <file alias="it">locale/oro_it.qm</file>
+        <file alias="ja">locale/oro_ja.qm</file>
+        <file alias="ko_KR">locale/oro_ko_KR.qm</file>
+        <file alias="lt_LT">locale/oro_lt_LT.qm</file>
+        <file alias="nl">locale/oro_nl.qm</file>
+        <file alias="pl">locale/oro_pl.qm</file>
+        <file alias="pt">locale/oro_pt.qm</file>
+        <file alias="pt_BR">locale/oro_pt_BR.qm</file>
+        <file alias="ro_RO">locale/oro_ro_RO.qm</file>
+        <file alias="ru">locale/oro_ru.qm</file>
+        <file alias="sk">locale/oro_sk.qm</file>
+        <file alias="sv">locale/oro_sv.qm</file>
+        <file alias="tr">locale/oro_tr.qm</file>
+        <file alias="uk">locale/oro_uk.qm</file>
+        <file alias="vi">locale/oro_vi.qm</file>
+        <file alias="zh_CN">locale/oro_zh_CN.qm</file>
+        <file alias="zh_TW">locale/oro_zh_TW.qm</file>
+    </qresource>
+</RCC>
