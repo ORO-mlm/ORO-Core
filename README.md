@@ -10,16 +10,16 @@ The goal of ORO is to achieve a decentralized sustainable crypto currency with n
 - Fast transactions featuring guaranteed zero confirmation transactions, we call it _SwiftX_.
 - Decentralized blockchain voting utilizing Masternode technology to form a DAO. The blockchain will distribute monthly treasury funds based on successful proposals submitted by the community and voted on by the DAO.
 
-More information at [oro.com](https://www.oro.com)
+More information at [oro.cm](https://www.oro.cm)
 
 ### Coin Specs
 <table>
 <tr><td>Algo</td><td>Quark</td></tr>
 <tr><td>Block Time</td><td>60 Seconds</td></tr>
 <tr><td>Difficulty Retargeting</td><td>Every Block</td></tr>
-<tr><td>Max Coin Supply (PoW Phase)</td><td>100,385,614 ORO</td></tr>
-<tr><td>Max Coin Supply (PoS Phase)</td><td>10,000,000,000 ORO</td></tr>
-<tr><td>Premine</td><td>100,000,000 ORO</td></tr>
+<tr><td>Max Coin Supply (PoW Phase)</td><td>1,125,899,906,842,629 ORO</td></tr>
+<tr><td>Max Coin Supply (PoS Phase)</td><td>∞ ORO</td></tr>
+<tr><td>Premine</td><td>1,125,899,906,842,624 ORO</td></tr>
 </table>
 
 ### Reward Distribution
@@ -27,22 +27,22 @@ More information at [oro.com](https://www.oro.com)
 <table>
 <th colspan=4>Genesis Block</th>
 <tr><th>Block Height</th><th>Reward Amount</th><th>Notes</th></tr>
-<tr><td>1</td><td>100,000,000 ORO</td><td>Initial Pre-mine</td></tr>
+<tr><td>1</td><td>1,125,899,906,842,624 ORO</td><td>Initial Pre-mine</td></tr>
 </table>
 
 ### PoW Rewards Breakdown
 
 <table>
-<th>Block Height</th><th>Masternodes</th><th>Miner</th><th>Dev</th>
-<tr><td>2-1000</td><td>0.25 ORO</td><td>0.05 ORO</td><td>385.7 ORO</td></tr>
+<th>Block Height</th><th>Masternodes</th><th>Miner</th>
+<tr><td>2-5,000</td><td>0 ORO</td><td>0.001 ORO</td>/tr>
 </table>
 
 ### PoS Rewards Breakdown
 
 <table>
-<th>Phase</th><th>Block Height</th><th>Reward</th><th>Masternodes</th><th>Stakers</th><th>Dev</th>
-<tr><td>Phase 0</td><td>1001-25900000</td><td>386 ORO</td><td>0.25 ORO</td><td>0.05 ORO</td><td>385.7 ORO</td></tr>
-<tr><td>Phase 1</td><td>25900001-∞</td><td>0.3 ORO</td><td>0.25 ORO</td><td>0.05 ORO</td><td>0 ORO</td></tr>
+<th>Phase</th><th>Block Height</th><th>Reward</th><th>Masternodes</th><th>Stakers</th>,
+<tr><td>Phase 0</td><td>5,001-8,388,000</td><td>0.001 ORO</td><td>0 ORO</td><td>0.001 ORO</td></tr>
+<tr><td>Phase 1</td><td>8,388,001-∞</td><td>Just Fee</td><td>0 ORO</td><td>Just Fee ORO</td></tr>
 
 </table>
 
