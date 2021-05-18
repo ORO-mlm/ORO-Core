@@ -1423,8 +1423,8 @@ Den startar automatiskt så snart plånboken har tillräckligt många bekräftel
         <translation>Skapa ny masternode kontrollör</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a ORO Masternode you must dedicate 10,000,000 ORO (the unit of ORO) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>För att skapa en ORO Masternode måste du avsätta 10,000,000 ORO (enheten till ORO) till nätverket (dessa mynt är dock fortfarande dina och kommer aldrig att lämna ditt innehav). Du kan stänga av noden och låsa upp mynt när som helst.</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a ORO Masternode you must dedicate 200,000 ORO (the unit of ORO) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>För att skapa en ORO Masternode måste du avsätta 200,000 ORO (enheten till ORO) till nätverket (dessa mynt är dock fortfarande dina och kommer aldrig att lämna ditt innehav). Du kan stänga av noden och låsa upp mynt när som helst.</translation>
     </message>
     <message>
         <source>Make sure you have this amount of coins.</source>
@@ -1435,8 +1435,8 @@ Den startar automatiskt så snart plånboken har tillräckligt många bekräftel
         <translation>Ställ in Masternode namn</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000,000 ORO will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>En transaktion på 10,000,000 ORO kommer göras till en ny tom adress i din plånbok. Adressen är märkt under huvudnodens namn.</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 200,000 ORO will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>En transaktion på 200,000 ORO kommer göras till en ny tom adress i din plånbok. Adressen är märkt under huvudnodens namn.</translation>
     </message>
     <message>
         <source>Set Master Node’s IP and port</source>
@@ -1701,8 +1701,8 @@ Are you sure?</source>
         <translation>Masternode conf file existerar inte</translation>
     </message>
     <message>
-        <source>Not enough balance to create a masternode, 10,000,000 ORO required.</source>
-        <translation>Inte nog på saldot för att skapa en Masternode, 10,000,000 ORO behövs.</translation>
+        <source>Not enough balance to create a masternode, 200,000 ORO required.</source>
+        <translation>Inte nog på saldot för att skapa en Masternode, 200,000 ORO behövs.</translation>
     </message>
     <message>
         <source>Error creating masternode</source>
@@ -4460,12 +4460,12 @@ Var vänlig kontrollera adressen och försök igen.</translation>
         <translation>Kan ej lokalisera tillräckligt Fördunklingsdenominationerade pengar för denna transaktion.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10,000,000 ORO.</source>
-        <translation>Kan ej lokalisera tillräckligt Fördunkling icke-denominationerade pengar för denna transaktion som inte är 10,000,000 ORO.</translation>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 200,000 ORO.</source>
+        <translation>Kan ej lokalisera tillräckligt Fördunkling icke-denominationerade pengar för denna transaktion som inte är 200,000 ORO.</translation>
     </message>
     <message>
-        <source>Unable to locate enough funds for this transaction that are not equal 10,000,000 ORO.</source>
-        <translation>Kan inte hitta tillräckligt med pengar för denna transaktion som inte är 10,000,000 ORO.</translation>
+        <source>Unable to locate enough funds for this transaction that are not equal 200,000 ORO.</source>
+        <translation>Kan inte hitta tillräckligt med pengar för denna transaktion som inte är 200,000 ORO.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>

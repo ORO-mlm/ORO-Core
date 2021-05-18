@@ -28,7 +28,7 @@ Build-Depends: debhelper,
  libzmq3-dev,
  dh-systemd
 Standards-Version: 3.9.2
-Homepage: http://www.oro.com
+Homepage: http://www.oro.cm
 Vcs-Git: git://github.com/ORO-Project/ORO.git
 Vcs-Browser: http://github.com/ORO-Project/ORO
 

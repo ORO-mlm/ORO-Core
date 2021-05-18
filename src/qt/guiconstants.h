@@ -54,7 +54,7 @@ static const int MAX_URI_LENGTH = 255;
 #define SPINNER_FRAMES 35
 
 #define QAPP_ORG_NAME "ORO"
-#define QAPP_ORG_DOMAIN "oro.com"
+#define QAPP_ORG_DOMAIN "oro.cm"
 #define QAPP_APP_NAME_DEFAULT "ORO-Qt"
 #define QAPP_APP_NAME_TESTNET "ORO-Qt-testnet"
 

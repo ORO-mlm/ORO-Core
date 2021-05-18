@@ -214,7 +214,7 @@ QT_TRANSLATE_NOOP("oro-core", ""
 "Unable to locate enough Obfuscation denominated funds for this transaction."),
 QT_TRANSLATE_NOOP("oro-core", ""
 "Unable to locate enough Obfuscation non-denominated funds for this "
-"transaction that are not equal 10,000,000 ORO."),
+"transaction that are not equal 200,000 ORO."),
 QT_TRANSLATE_NOOP("oro-core", ""
 "Unable to locate enough funds for this transaction that are not equal 10000 "
 "ORO."),

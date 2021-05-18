@@ -408,7 +408,7 @@ void SettingsConsoleWidget::clear(){
     changeTheme(isLightTheme(), theme);
 
 #ifdef Q_OS_MAC
-    QString clsKey = "(???)-L";
+    QString clsKey = "(⌘)-L";
 #else
     QString clsKey = "Ctrl-L";
 #endif

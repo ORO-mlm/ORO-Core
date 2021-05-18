@@ -2075,7 +2075,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+23"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a ORO Masternode you must dedicate 10,000,000 ORO (the unit of ORO) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a ORO Masternode you must dedicate 200,000 ORO (the unit of ORO) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2085,17 +2085,17 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+54"/>
-        <source>Set Master Node???s Name</source>
+        <source>Set Master Nodes Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000,000 ORO will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node&apos;s name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 200,000 ORO will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node&apos;s name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+44"/>
-        <source>Set Master Node???s IP and port</source>
+        <source>Set Master Node’s IP and port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2357,7 +2357,7 @@ Are you sure?</source>
     </message>
     <message>
         <location line="+7"/>
-        <source>Not enough balance to create a masternode, 10,000,000 ORO required.</source>
+        <source>Not enough balance to create a masternode, 200,000 ORO required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5307,7 +5307,7 @@ Verify that you have installed a predetermined text editor.</source>
                            zORO is an optional privacy-centric method of coin mixing on the
                            ORO blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style=&apos;color: #88edff&apos; href=&apos;https://oro.com/zoro/&apos;&gt;
+                           &lt;a style=&apos;color: #88edff&apos; href=&apos;https://oro.cm/zoro/&apos;&gt;
                            &quot;ORO Zerocoin (zORO) Technical Paper&quot;&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -5352,13 +5352,13 @@ Verify that you have installed a predetermined text editor.</source>
                            balance to zORO to assist the network. If you do not wish to
                            stake zORO or take advantage of the privacy benefit it brings,
                            you can disable the automatic minting in your ORO wallet by
-                           going to Settings-&gt;Options and deselecting ???Enable zORO Automint???.
+                           going to Settings-&gt;Options and deselecting “Enable zORO Automint”.
                            If you are not making use of the ORO-QT or GUI you can simply open
                            your oro.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            You can read more about zORO in the
-                           &lt;a style=&apos;color: #88edff&apos; href=&apos;https://oro.com/zoro/&apos;&gt; &quot;ORO Zerocoin (zORO) Technical Paper&quot;&lt;/a&gt;.
+                           &lt;a style=&apos;color: #88edff&apos; href=&apos;https://oro.cm/zoro/&apos;&gt; &quot;ORO Zerocoin (zORO) Technical Paper&quot;&lt;/a&gt;.
                            If you would like to keep and stake your zORO, please read the &quot;How do I stake&quot;
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -5382,7 +5382,7 @@ Verify that you have installed a predetermined text editor.</source>
                            zORO can be spent and sent to any ORO address. The receiver will
                            receive standard ORO but the origin of the ORO is anonymized by the zORO Protocol.
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-                           If you want more zORO you will need to mint your balance in the ???Privacy??? tab.
+                           If you want more zORO you will need to mint your balance in the “Privacy” tab.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation type="unfinished"></translation>
@@ -5444,7 +5444,7 @@ Verify that you have installed a predetermined text editor.</source>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style=&apos;color: #88edff&apos; href=&apos;https://discord.oro.com&apos;&gt;
+                           &lt;a style=&apos;color: #88edff&apos; href=&apos;https://discord.oro.cm&apos;&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, One can be
                            &lt;a style=&apos;color: #88edff&apos; href=&apos;https://ORO.freshdesk.com&apos;&gt;
@@ -5468,7 +5468,7 @@ Verify that you have installed a predetermined text editor.</source>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
                            A masternode is a computer running a full node ORO core wallet with a
-                           requirement of 10,000,000 ORO secured collateral to provide extra services
+                           requirement of 200,000 ORO secured collateral to provide extra services
                            to the network and in return, receive a portion of the block reward
                            regularly.  These services include:
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
@@ -5500,7 +5500,7 @@ Verify that you have installed a predetermined text editor.</source>
                            Requirements:
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;10,000,000 ORO per single Masternode instance&lt;/li&gt;
+                           &lt;li&gt;200,000 ORO per single Masternode instance&lt;/li&gt;
                            &lt;li&gt;Must be stored in a core wallet&lt;/li&gt;
                            &lt;li&gt;Need dedicated IP address&lt;/li&gt;
                            &lt;li&gt;Masternode wallet to remain online&lt;/li&gt;
@@ -5521,7 +5521,7 @@ Verify that you have installed a predetermined text editor.</source>
     </message>
     <message>
         <location line="+26"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;A Masternode Controller wallet is where the 10,000,000 ORO collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet/s and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;A Masternode Controller wallet is where the 200,000 ORO collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet/s and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7572,7 +7572,7 @@ ORO Core Wallet</source>
     </message>
     <message>
         <location line="+27"/>
-        <source>ORO is the world???s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
+        <source>ORO is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7948,12 +7948,12 @@ ORO Core Wallet</source>
     </message>
     <message>
         <location line="+2"/>
-        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10,000,000 ORO.</source>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 200,000 ORO.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Unable to locate enough funds for this transaction that are not equal 10,000,000 ORO.</source>
+        <source>Unable to locate enough funds for this transaction that are not equal 200,000 ORO.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

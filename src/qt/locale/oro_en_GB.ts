@@ -3195,12 +3195,12 @@ Please check the address and try again.</translation>
         <translation>Unable to locate enough Obfuscation denominated funds for this transaction.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10,000,000 ORO.</source>
-        <translation>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10,000,000 ORO.</translation>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 200,000 ORO.</source>
+        <translation>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 200,000 ORO.</translation>
     </message>
     <message>
-        <source>Unable to locate enough funds for this transaction that are not equal 10,000,000 ORO.</source>
-        <translation>Unable to locate enough funds for this transaction that are not equal 10,000,000 ORO.</translation>
+        <source>Unable to locate enough funds for this transaction that are not equal 200,000 ORO.</source>
+        <translation>Unable to locate enough funds for this transaction that are not equal 200,000 ORO.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>

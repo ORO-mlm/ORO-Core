@@ -346,7 +346,7 @@ void MasterNodesWidget::onDeleteMNClicked(){
 void MasterNodesWidget::onCreateMNClicked(){
     if(verifyWalletUnlocked()) {
         if(walletModel->getBalance() <= (Params().MasternodeCollateral())){
-            inform(tr("Not enough balance to create a masternode, 10,000,000 ORO required."));
+            inform(tr("Not enough balance to create a masternode, 200,000 ORO required."));
             return;
         }
         showHideOp(true);

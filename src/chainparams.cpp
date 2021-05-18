@@ -54,8 +54,8 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of(0, uint256("0x0000035a60957f38e09d568cfda53f9161a33cae4fe8bb91230af549da830ed4"))
     (100, uint256("0x000000100bfa43c35a5a5418d0d52bf4486edf89c6d2f7ccf5bfabe5a08d8807"))
-    // (1100, uint256("81c770e1fc65a8c6539a2a1e5dfe22659cde7df5b0f0f204f72931115df6e83a"))
-    // (11000, uint256("10cb0f1f26c226d5e224595bebb9881768337daa326e316652a714bd5ff8daa4"))
+    (242500, uint256("562c92b3279efbc0b233e87515950684e39ab71b62af094bff5ee2ed41c90123"))
+    // (242501, uint256("00cb0f1f26c226d5e224595bebb9881768337daa326e316652a714bd5ff8daa4"))
     // (616764, uint256("29dd0bd1c59484f290896687b4ffb6a49afa5c498caf61967c69a541f8191557")) //first block to use modifierV2
     // (623933, uint256("c7aafa648a0f1450157dc93bd4d7448913a85b7448f803b4ab970d91fc2a7da7"))
     // (791150, uint256("8e76f462e4e82d1bd21cb72e1ce1567d4ddda2390f26074ffd1f5d9c270e5e50"))
@@ -210,7 +210,7 @@ public:
         nBlockDoubleAccumulated = 1050010;
         nEnforceNewSporkKey = 1566860400; //!> Sporks signed after Monday, August 26, 2019 11:00:00 PM GMT must use the new spork key
         nRejectOldSporkKey = 1569538800;  //!> Fully reject old spork key after Thursday, September 26, 2019 11:00:00 PM GMT
-        nBlockStakeModifierlV2 = 1967000;
+        nBlockStakeModifierlV2 = 242501;
         nBIP65ActivationHeight = 1808634;
         // Activation height for TimeProtocolV2, Blocks V7 and newMessageSignatures
         nBlockTimeProtocolV2 = 2153200;
@@ -289,7 +289,7 @@ public:
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
-        fMiningRequiresPeers = false;
+        fMiningRequiresPeers = true;
         fAllowMinDifficultyBlocks = false;
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;

@@ -3,7 +3,7 @@ ORO Core
 
 Setup
 ---------------------
-[ORO Core](http://oro.com/wallet) is the original ORO client and it builds the backbone of the network. However, it downloads and stores the entire history of ORO transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[ORO Core](http://oro.cm/wallet) is the original ORO client and it builds the backbone of the network. However, it downloads and stores the entire history of ORO transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
@@ -28,8 +28,8 @@ Drag ORO-Qt to your applications folder, and then run ORO-Qt.
 
 * See the documentation at the [ORO Wiki](https://github.com/ORO-Project/ORO/wiki)
 for help and more information.
-* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [ORO Forum](http://forum.oro.com/).
-* Join our Discord server [Discord Server](https://discord.oro.com)
+* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [ORO Forum](http://forum.oro.cm/).
+* Join our Discord server [Discord Server](https://discord.oro.cm)
 
 Building
 ---------------------
@@ -56,8 +56,8 @@ The ORO repo's [root README](/README.md) contains relevant information on the de
 - [Dnsseed Policy](dnsseed-policy.md)
 
 ### Resources
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [ORO](http://forum.oro.com/) forum.
-* Join the [ORO Discord](https://discord.oro.com).
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [ORO](http://forum.oro.cm/) forum.
+* Join the [ORO Discord](https://discord.oro.cm).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)
