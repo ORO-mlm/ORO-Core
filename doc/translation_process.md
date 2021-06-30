@@ -73,7 +73,7 @@ To assist in updating translations, we have created a script to help.
 ```bash
 git ls-files src/qt/locale/*ts|xargs -n1 basename|sed 's/\(oro_\(.*\)\).ts/<file alias="\2">locale\/\1.qm<\/file>/'
 ```
-4. Update `src/Makefile.qt.include` manually or via
+4. Update `src/Makefile.qt_locale.include` manually or via
 ```bash
 git ls-files src/qt/locale/*ts|xargs -n1 basename|sed 's/\(oro_\(.*\)\).ts/  qt\/locale\/\1.ts \\/'
 ```
@@ -104,6 +104,6 @@ To create a new language template, you will need to edit the languages manifest 
 **Note:** that the language translation file **must end in `.qm`** (the compiled extension), and not `.ts`.
 
 ### Questions and general assistance
-The ORO Core translation maintainers include *Fuzzbawls*. You can find them, and others, in the [ORO Discord](https://discord.oro.cm).
+The ORO Core translation maintainers include *Fuzzbawls*. You can find them, and others, in the [ORO Discord](https://discord.oro.exchange).
 
 Announcements will be posted during application pre-releases to notify translators to check for updates.

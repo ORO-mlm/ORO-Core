@@ -5,8 +5,8 @@ Release Process
 
 ### Before every release candidate
 
-* Update translations (ping Fuzzbawls on Discord) see [translation_process.md](https://github.com/ORO-Project/ORO/blob/master/doc/translation_process.md#synchronising-translations).
-* Update manpages, see [gen-manpages.sh](https://github.com/oro-project/oro/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update translations (ping Fuzzbawls on Discord) see [translation_process.md](https://github.com/oro-cm/ORO/blob/master/doc/translation_process.md#synchronising-translations).
+* Update manpages, see [gen-manpages.sh](https://github.com/oro-cm/ORO/blob/master/contrib/devtools/README.md#gen-manpagessh).
 * Update release candidate version in `configure.ac` (`CLIENT_VERSION_RC`)
 
 ### Before every major and minor release
@@ -98,8 +98,8 @@ Ensure gitian-builder is up-to-date:
 
     pushd ./gitian-builder
     mkdir -p inputs
-    wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
-    wget -P inputs http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
+    wget -O osslsigncode-2.0.tar.gz -P inputs https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz
+    echo '5a60e0a4b3e0b4d655317b2f12a810211c50242138322b16e7e01c6fbb89d92f inputs/osslsigncode-2.0.tar.gz' | sha256sum -c
     popd
 
 Create the macOS SDK tarball, see the [macOS build instructions](build-osx.md#deterministic-macos-dmg-notes) for details, and copy it into the inputs directory.
@@ -229,7 +229,6 @@ Create (and optionally verify) the signed Windows binaries:
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../oro/contrib/gitian-descriptors/gitian-win-signer.yml
     ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../oro/contrib/gitian-descriptors/gitian-win-signer.yml
     mv build/out/oro-*win64-setup.exe ../oro-${VERSION}-win64-setup.exe
-    mv build/out/oro-*win32-setup.exe ../oro-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed macOS/Windows binaries:
@@ -259,8 +258,6 @@ oro-${VERSION}-x86_64-linux-gnu.tar.gz
 oro-${VERSION}-osx64.tar.gz
 oro-${VERSION}-osx.dmg
 oro-${VERSION}.tar.gz
-oro-${VERSION}-win32-setup.exe
-oro-${VERSION}-win32.zip
 oro-${VERSION}-win64-setup.exe
 oro-${VERSION}-win64.zip
 ```
@@ -288,6 +285,6 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/ORO-Project/ORO/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/oro-cm/ORO/releases/new) with a link to the archived release notes.
 
   - Celebrate

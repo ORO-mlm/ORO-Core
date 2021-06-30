@@ -6,65 +6,28 @@ bin_PROGRAMS += qt/oro-qt
 EXTRA_LIBRARIES += qt/libbitcoinqt.a
 
 # oro qt core #
-QT_TS = \
-  qt/locale/oro_bg.ts \
-  qt/locale/oro_ca.ts \
-  qt/locale/oro_cs.ts \
-  qt/locale/oro_da.ts \
-  qt/locale/oro_de.ts \
-  qt/locale/oro_en.ts \
-  qt/locale/oro_en_GB.ts \
-  qt/locale/oro_en_US.ts \
-  qt/locale/oro_eo.ts \
-  qt/locale/oro_es.ts \
-  qt/locale/oro_es_ES.ts \
-  qt/locale/oro_fi.ts \
-  qt/locale/oro_fr_FR.ts \
-  qt/locale/oro_hi_IN.ts \
-  qt/locale/oro_hr.ts \
-  qt/locale/oro_hr_HR.ts \
-  qt/locale/oro_it.ts \
-  qt/locale/oro_ja.ts \
-  qt/locale/oro_ko_KR.ts \
-  qt/locale/oro_lt_LT.ts \
-  qt/locale/oro_nl.ts \
-  qt/locale/oro_pl.ts \
-  qt/locale/oro_pt.ts \
-  qt/locale/oro_pt_BR.ts \
-  qt/locale/oro_ro_RO.ts \
-  qt/locale/oro_ru.ts \
-  qt/locale/oro_sk.ts \
-  qt/locale/oro_sv.ts \
-  qt/locale/oro_tr.ts \
-  qt/locale/oro_uk.ts \
-  qt/locale/oro_vi.ts \
-  qt/locale/oro_zh_CN.ts \
-  qt/locale/oro_zh_TW.ts
+include Makefile.qt_locale.include
 
 QT_FORMS_UI = \
   qt/forms/addressbookpage.ui \
   qt/forms/askpassphrasedialog.ui \
   qt/forms/coincontroldialog.ui \
-  qt/forms/blockexplorer.ui \
   qt/forms/editaddressdialog.ui \
-  qt/forms/governancepage.ui \
   qt/forms/helpmessagedialog.ui \
   qt/forms/intro.ui \
   qt/forms/openuridialog.ui \
   qt/forms/optionsdialog.ui \
   qt/forms/rpcconsole.ui \
   qt/oro/forms/loadingdialog.ui \
-  qt/forms/zorocontroldialog.ui \
   qt/oro/forms/snackbar.ui \
   qt/oro/forms/navmenuwidget.ui \
   qt/oro/forms/lockunlock.ui \
   qt/oro/forms/expandablebutton.ui \
   qt/oro/forms/receivedialog.ui \
-  qt/oro/forms/walletpassworddialog.ui \
+  qt/oro/forms/balancebubble.ui \
   qt/oro/forms/topbar.ui \
   qt/oro/forms/txrow.ui \
   qt/oro/forms/dashboardwidget.ui \
-  qt/oro/forms/coincontrolorowidget.ui \
   qt/oro/forms/addresslabelrow.ui \
   qt/oro/forms/contactdropdownrow.ui \
   qt/oro/forms/mninfodialog.ui \
@@ -74,10 +37,10 @@ QT_FORMS_UI = \
   qt/oro/forms/masternodeswidget.ui \
   qt/oro/forms/myaddressrow.ui \
   qt/oro/forms/csrow.ui \
+  qt/oro/forms/sendmemodialog.ui \
   qt/oro/forms/sendchangeaddressdialog.ui \
   qt/oro/forms/sendconfirmdialog.ui \
   qt/oro/forms/sendcustomfeedialog.ui \
-  qt/oro/forms/sendchangeaddressdialog.ui \
   qt/oro/forms/sendmultirow.ui \
   qt/oro/forms/send.ui \
   qt/oro/forms/addnewaddressdialog.ui \
@@ -87,10 +50,9 @@ QT_FORMS_UI = \
   qt/oro/forms/tooltipmenu.ui \
   qt/oro/forms/addresseswidget.ui \
   qt/oro/forms/defaultdialog.ui \
-  qt/oro/forms/denomgenerationdialog.ui \
-  qt/oro/forms/privacywidget.ui \
   qt/oro/forms/coldstakingwidget.ui \
   qt/oro/settings/forms/settingsbackupwallet.ui \
+  qt/oro/settings/forms/settingsexportcsv.ui \
   qt/oro/settings/forms/settingsbittoolwidget.ui \
   qt/oro/settings/forms/settingsconsolewidget.ui \
   qt/oro/settings/forms/settingsdisplayoptionswidget.ui \
@@ -112,16 +74,13 @@ QT_MOC_CPP = \
   qt/moc_askpassphrasedialog.cpp \
   qt/moc_bantablemodel.cpp \
   qt/moc_bitcoinaddressvalidator.cpp \
-  qt/moc_bitcoinamountfield.cpp \
   qt/oro/moc_orogui.cpp \
   qt/moc_bitcoinunits.cpp \
-  qt/moc_blockexplorer.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
   qt/moc_csvmodelwriter.cpp \
   qt/moc_editaddressdialog.cpp \
-  qt/moc_governancepage.cpp \
   qt/moc_guiutil.cpp \
   qt/moc_intro.cpp \
   qt/moc_macdockiconhandler.cpp \
@@ -134,31 +93,26 @@ QT_MOC_CPP = \
   qt/moc_paymentserver.cpp \
   qt/moc_qvalidatedlineedit.cpp \
   qt/moc_qvaluecombobox.cpp \
-  qt/moc_proposalframe.cpp \
   qt/moc_recentrequeststablemodel.cpp \
   qt/moc_rpcconsole.cpp \
-  qt/moc_splashscreen.cpp \
   qt/moc_trafficgraphwidget.cpp \
-  qt/moc_transactiondesc.cpp \
   qt/moc_transactionfilterproxy.cpp \
   qt/moc_transactiontablemodel.cpp \
   qt/moc_utilitydialog.cpp \
   qt/moc_walletmodel.cpp \
   qt/oro/moc_loadingdialog.cpp \
-  qt/moc_zorocontroldialog.cpp \
   qt/oro/moc_pwidget.cpp \
+  qt/oro/moc_focuseddialog.cpp \
   qt/oro/moc_snackbar.cpp \
   qt/oro/moc_navmenuwidget.cpp \
   qt/oro/moc_lockunlock.cpp \
   qt/oro/moc_expandablebutton.cpp \
   qt/oro/moc_furabstractlistitemdelegate.cpp \
   qt/oro/moc_receivedialog.cpp \
-  qt/oro/moc_walletpassworddialog.cpp \
   qt/oro/moc_pfborderimage.cpp \
   qt/oro/moc_topbar.cpp \
   qt/oro/moc_txrow.cpp \
   qt/oro/moc_dashboardwidget.cpp \
-  qt/oro/moc_coincontrolorowidget.cpp \
   qt/oro/moc_addresslabelrow.cpp \
   qt/oro/moc_contactdropdownrow.cpp \
   qt/oro/moc_mninfodialog.cpp \
@@ -174,7 +128,7 @@ QT_MOC_CPP = \
   qt/oro/moc_sendchangeaddressdialog.cpp \
   qt/oro/moc_sendconfirmdialog.cpp \
   qt/oro/moc_sendcustomfeedialog.cpp \
-  qt/oro/moc_sendchangeaddressdialog.cpp \
+  qt/oro/moc_sendmemodialog.cpp \
   qt/oro/moc_sendmultirow.cpp \
   qt/oro/moc_send.cpp \
   qt/oro/moc_addnewaddressdialog.cpp \
@@ -184,10 +138,9 @@ QT_MOC_CPP = \
   qt/oro/moc_tooltipmenu.cpp \
   qt/oro/moc_addresseswidget.cpp \
   qt/oro/moc_defaultdialog.cpp \
-  qt/oro/moc_denomgenerationdialog.cpp \
-  qt/oro/moc_privacywidget.cpp \
   qt/oro/moc_coldstakingwidget.cpp \
   qt/oro/settings/moc_settingsbackupwallet.cpp \
+  qt/oro/settings/moc_settingsexportcsv.cpp \
   qt/oro/settings/moc_settingsbittoolwidget.cpp \
   qt/oro/settings/moc_settingsconsolewidget.cpp \
   qt/oro/settings/moc_settingsdisplayoptionswidget.cpp \
@@ -209,7 +162,6 @@ BITCOIN_MM = \
 
 QT_MOC = \
   qt/oro.moc \
-  qt/bitcoinamountfield.moc \
   qt/intro.moc \
   qt/rpcconsole.moc \
   qt/oro/settings/moc_settingsconsolewidget.cpp
@@ -229,16 +181,13 @@ BITCOIN_QT_H = \
   qt/askpassphrasedialog.h \
   qt/bantablemodel.h \
   qt/bitcoinaddressvalidator.h \
-  qt/bitcoinamountfield.h \
   qt/oro/orogui.h \
   qt/bitcoinunits.h \
-  qt/blockexplorer.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
   qt/csvmodelwriter.h \
   qt/editaddressdialog.h \
-  qt/governancepage.h \
   qt/guiconstants.h \
   qt/guiutil.h \
   qt/intro.h \
@@ -253,14 +202,11 @@ BITCOIN_QT_H = \
   qt/paymentserver.h \
   qt/peertablemodel.h \
   qt/platformstyle.h \
-  qt/proposalframe.h \
   qt/qvalidatedlineedit.h \
   qt/qvaluecombobox.h \
   qt/recentrequeststablemodel.h \
   qt/rpcconsole.h \
-  qt/splashscreen.h \
   qt/trafficgraphwidget.h \
-  qt/transactiondesc.h \
   qt/transactionfilterproxy.h \
   qt/transactionrecord.h \
   qt/transactiontablemodel.h \
@@ -271,8 +217,8 @@ BITCOIN_QT_H = \
   qt/oro/pfborderimage.h \
   qt/oro/loadingdialog.h \
   qt/winshutdownmonitor.h \
-  qt/zorocontroldialog.h \
   qt/oro/pwidget.h \
+  qt/oro/focuseddialog.h \
   qt/oro/guitransactionsutils.h \
   qt/oro/snackbar.h \
   qt/oro/navmenuwidget.h \
@@ -283,13 +229,12 @@ BITCOIN_QT_H = \
   qt/oro/txviewholder.h \
   qt/oro/qtutils.h \
   qt/oro/expandablebutton.h \
-  qt/oro/walletpassworddialog.h \
+  qt/oro/balancebubble.h \
   qt/oro/topbar.h \
   qt/oro/txrow.h \
   qt/oro/addressholder.h \
   qt/oro/addressfilterproxymodel.h \
   qt/oro/dashboardwidget.h \
-  qt/oro/coincontrolorowidget.h \
   qt/oro/addresslabelrow.h \
   qt/oro/contactdropdownrow.h \
   qt/oro/mninfodialog.h \
@@ -305,7 +250,7 @@ BITCOIN_QT_H = \
   qt/oro/sendchangeaddressdialog.h \
   qt/oro/sendconfirmdialog.h \
   qt/oro/sendcustomfeedialog.h \
-  qt/oro/sendchangeaddressdialog.h \
+  qt/oro/sendmemodialog.h \
   qt/oro/sendmultirow.h \
   qt/oro/send.h \
   qt/oro/addnewaddressdialog.h \
@@ -315,10 +260,9 @@ BITCOIN_QT_H = \
   qt/oro/tooltipmenu.h \
   qt/oro/addresseswidget.h \
   qt/oro/defaultdialog.h \
-  qt/oro/denomgenerationdialog.h \
-  qt/oro/privacywidget.h \
   qt/oro/coldstakingwidget.h \
   qt/oro/settings/settingsbackupwallet.h \
+  qt/oro/settings/settingsexportcsv.h \
   qt/oro/settings/settingsbittoolwidget.h \
   qt/oro/settings/settingsconsolewidget.h \
   qt/oro/settings/settingsdisplayoptionswidget.h \
@@ -335,78 +279,18 @@ BITCOIN_QT_H = \
   qt/oro/splash.h
 
 RES_ICONS = \
-  qt/res/icons/add.png \
-  qt/res/icons/address-book.png \
-  qt/res/icons/automint_active.png \
-  qt/res/icons/automint_inactive.png \
   qt/res/icons/bitcoin.ico \
   qt/res/icons/bitcoin.png \
   qt/res/icons/bitcoin_testnet.ico \
   qt/res/icons/bitcoin_testnet.png \
   qt/res/icons/bitcoin_regtest.png \
-  qt/res/icons/browse.png \
-  qt/res/icons/clock1.png \
-  qt/res/icons/clock2.png \
-  qt/res/icons/clock3.png \
-  qt/res/icons/clock4.png \
-  qt/res/icons/clock5.png \
-  qt/res/icons/configure.png \
-  qt/res/icons/connect0_16.png \
-  qt/res/icons/connect1_16.png \
-  qt/res/icons/connect2_16.png \
-  qt/res/icons/connect3_16.png \
-  qt/res/icons/connect4_16.png \
-  qt/res/icons/debugwindow.png \
-  qt/res/icons/edit.png \
-  qt/res/icons/editcopy.png \
-  qt/res/icons/editpaste.png \
-  qt/res/icons/explorer.png \
-  qt/res/icons/export.png \
-  qt/res/icons/eye.png \
-  qt/res/icons/eye_minus.png \
-  qt/res/icons/eye_plus.png \
-  qt/res/icons/filesave.png \
-  qt/res/icons/history.png \
-  qt/res/icons/key.png \
   qt/res/icons/lock_closed.png \
   qt/res/icons/lock_open.png \
-  qt/res/icons/masternodes.png \
-  qt/res/icons/onion.png \
   qt/res/icons/overview.png \
-  qt/res/icons/qrcode.png \
-  qt/res/icons/quit.png \
-  qt/res/icons/receive.png \
-  qt/res/icons/receive_dark.png \
-  qt/res/icons/privacy.png \
-  qt/res/icons/remove.png \
-  qt/res/icons/send.png \
-  qt/res/icons/send_dark.png \
-  qt/res/icons/governance.png \
-  qt/res/icons/governance_dark.png \
-  qt/res/icons/staking_active.png \
-  qt/res/icons/staking_inactive.png \
-  qt/res/icons/synced.png \
-  qt/res/icons/trade.png \
-  qt/res/icons/transaction0.png \
-  qt/res/icons/transaction2.png \
-  qt/res/icons/transaction_conflicted.png \
-  qt/res/icons/tx_inout.png \
-  qt/res/icons/tx_input.png \
-  qt/res/icons/tx_output.png \
-  qt/res/icons/tx_mined.png \
   qt/res/icons/ic-transaction-received.svg \
   qt/res/icons/ic-transaction-mint.svg \
   qt/res/icons/ic-transaction-sent.svg \
   qt/res/icons/ic-transaction-staked.svg \
-  qt/res/icons/unit_oro.png \
-  qt/res/icons/unit_moro.png \
-  qt/res/icons/unit_uoro.png \
-  qt/res/icons/unit_toro.png \
-  qt/res/icons/unit_tmoro.png \
-  qt/res/icons/unit_tuoro.png \
-  qt/res/icons/yesvote.png \
-  qt/res/icons/novote.png \
-  qt/res/icons/abstainvote.png \
   qt/oro/res/img/bg-dashboard-banner.png \
   qt/oro/res/img/bg-multi-number-dark.svg \
   qt/oro/res/img/ic-check-locked.svg \
@@ -483,6 +367,7 @@ RES_ICONS = \
   qt/oro/res/img/img-empty-dark-transactions.svg \
   qt/oro/res/img/ic-address-book-white.svg \
   qt/oro/res/img/ic-chevron-right.svg \
+  qt/oro/res/img/ic-chevron-right-liliac.svg \
   qt/oro/res/img/ic-nav-send.svg \
   qt/oro/res/img/img-empty-error.svg \
   qt/oro/res/img/ic-address-book.svg \
@@ -523,7 +408,7 @@ RES_ICONS = \
   qt/oro/res/img/ic-connect.svg \
   qt/oro/res/img/ic-submenu-lock.svg \
   qt/oro/res/img/img-logo-oro@3x.png \
-  qt/oro/res/img/img-logo-oro.png \
+  qt/oro/res/img/img-logo-oro.svg \
   qt/oro/res/img/ic-arrow-right-white.svg \
   qt/oro/res/img/ic-arrow-left-white.svg \
   qt/oro/res/img/ic-arrow-left.svg \
@@ -563,6 +448,8 @@ RES_ICONS = \
   qt/oro/res/img/dark/ic-transaction-cs-contract-inactive.svg \
   qt/oro/res/img/img-qr.svg \
   qt/oro/res/img/ic-check-connect-off.svg \
+  qt/oro/res/img/ic-check-tor-off.svg \
+  qt/oro/res/img/ic-check-tor.svg \
   qt/oro/res/img/ic-label.svg \
   qt/oro/res/img/ic-transaction-received.svg \
   qt/oro/res/img/dark/ic-transaction-received.svg \
@@ -608,18 +495,16 @@ RES_ICONS = \
   qt/oro/res/img/ic-transaction-cs-contract.svg \
   qt/oro/res/img/ic-transaction-cs-contract-inactive.svg \
   qt/oro/res/img/ic-check-box-indeterminate.svg \
+  qt/oro/res/img/ic-information.svg \
+  qt/oro/res/img/ic-information-hover.svg \
   qt/oro/res/img/ani-loading-dark.gif \
   qt/oro/res/img/ani-loading.gif
-
-
 
 BITCOIN_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
   qt/bitcoinaddressvalidator.cpp \
-  qt/bitcoinamountfield.cpp \
   qt/oro/orogui.cpp \
   qt/bitcoinunits.cpp \
-  qt/blockexplorer.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
@@ -633,7 +518,6 @@ BITCOIN_QT_BASE_CPP = \
   qt/qvalidatedlineedit.cpp \
   qt/qvaluecombobox.cpp \
   qt/rpcconsole.cpp \
-  qt/splashscreen.cpp \
   qt/trafficgraphwidget.cpp \
   qt/utilitydialog.cpp
 
@@ -643,25 +527,21 @@ BITCOIN_QT_WALLET_CPP = \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
-  qt/blockexplorer.cpp \
   qt/coincontroldialog.cpp \
   qt/coincontroltreewidget.cpp \
   qt/editaddressdialog.cpp \
-  qt/governancepage.cpp \
   qt/openuridialog.cpp \
   qt/paymentrequestplus.cpp \
   qt/paymentserver.cpp \
-  qt/proposalframe.cpp \
   qt/recentrequeststablemodel.cpp \
-  qt/transactiondesc.cpp \
   qt/transactionfilterproxy.cpp \
   qt/transactionrecord.cpp \
   qt/transactiontablemodel.cpp \
   qt/walletmodel.cpp \
   qt/walletmodeltransaction.cpp \
   qt/oro/loadingdialog.cpp \
-  qt/zorocontroldialog.cpp \
   qt/oro/pwidget.cpp \
+  qt/oro/focuseddialog.cpp \
   qt/oro/guitransactionsutils.cpp \
   qt/oro/snackbar.cpp \
   qt/oro/navmenuwidget.cpp \
@@ -671,13 +551,12 @@ BITCOIN_QT_WALLET_CPP = \
   qt/oro/txviewholder.cpp \
   qt/oro/qtutils.cpp \
   qt/oro/expandablebutton.cpp \
-  qt/oro/walletpassworddialog.cpp \
+  qt/oro/balancebubble.cpp \
   qt/oro/topbar.cpp \
   qt/oro/txrow.cpp \
   qt/oro/addressholder.cpp \
   qt/oro/addressfilterproxymodel.cpp \
   qt/oro/dashboardwidget.cpp \
-  qt/oro/coincontrolorowidget.cpp \
   qt/oro/addresslabelrow.cpp \
   qt/oro/contactdropdownrow.cpp \
   qt/oro/contactsdropdown.cpp \
@@ -693,7 +572,7 @@ BITCOIN_QT_WALLET_CPP = \
   qt/oro/sendchangeaddressdialog.cpp \
   qt/oro/sendconfirmdialog.cpp \
   qt/oro/sendcustomfeedialog.cpp \
-  qt/oro/sendchangeaddressdialog.cpp \
+  qt/oro/sendmemodialog.cpp \
   qt/oro/sendmultirow.cpp \
   qt/oro/send.cpp \
   qt/oro/addnewaddressdialog.cpp \
@@ -703,10 +582,9 @@ BITCOIN_QT_WALLET_CPP = \
   qt/oro/tooltipmenu.cpp \
   qt/oro/addresseswidget.cpp \
   qt/oro/defaultdialog.cpp \
-  qt/oro/denomgenerationdialog.cpp \
-  qt/oro/privacywidget.cpp \
   qt/oro/coldstakingwidget.cpp \
   qt/oro/settings/settingsbackupwallet.cpp \
+  qt/oro/settings/settingsexportcsv.cpp \
   qt/oro/settings/settingsbittoolwidget.cpp \
   qt/oro/settings/settingsconsolewidget.cpp \
   qt/oro/settings/settingsdisplayoptionswidget.cpp \
@@ -735,28 +613,17 @@ RES_IMAGES = \
   qt/res/images/about.png \
   qt/res/images/splash.png \
   qt/res/images/splash_testnet.png \
-  qt/res/images/splash_regtest.png \
-  qt/res/images/oro_logo_horizontal.png \
-  qt/res/images/downArrow_dark.png \
-  qt/res/images/downArrow_small_dark.png \
-  qt/res/images/downArrow_small.png \
-  qt/res/images/upArrow_small_dark.png \
-  qt/res/images/upArrow_small.png \
-  qt/res/images/leftArrow_small_dark.png \
-  qt/res/images/rightArrow_small_dark.png \
-  qt/res/images/qtreeview_selected.png
+  qt/res/images/splash_regtest.png
 
 RES_CSS = \
   qt/res/css/default.css \
   qt/oro/res/css/style_dark.css \
   qt/oro/res/css/style_light.css
 
-RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
-
 BITCOIN_RC = qt/res/oro-qt-res.rc
 
 BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
-  -I$(builddir)/qt/forms
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
 
 qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
@@ -764,7 +631,7 @@ qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
 
 qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
-  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES)
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
 
 nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
   $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
@@ -801,7 +668,7 @@ endif
 if ENABLE_ZMQ
 qt_oro_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
-qt_oro_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+qt_oro_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBSAPLING) $(LIBRUSTZCASH) $(LIBZCASH_LIBS) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
   $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 qt_oro_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
@@ -827,12 +694,12 @@ $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 	@rm $(@D)/temp_$(<F)
 
-$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(PROTOBUF_H)
 	@test -f $(RCC)
 	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name oro $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_oro_locale.qrc
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/oro/*.gcda qt/oro/*.gcno qt/oro/settings/*.gcda qt/oro/settings/*.gcno qt/temp_oro_locale.qrc
 
 CLEANFILES += $(CLEAN_QT)
 

@@ -24,7 +24,7 @@ from test_framework.mininode import (
     network_thread_join,
     network_thread_start,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import OroTestFramework
 from test_framework.util import (
     assert_equal,
     connect_nodes,
@@ -66,11 +66,11 @@ def custom_function():
 
     If this function is more generally useful for other tests, consider
     moving it to a module in test_framework."""
-    # self.log.info("running custom_function")  # Oops! Can't run self.log outside the BitcoinTestFramework
+    # self.log.info("running custom_function")  # Oops! Can't run self.log outside the OroTestFramework
     pass
 
-class ExampleTest(BitcoinTestFramework):
-    # Each functional test is a subclass of the BitcoinTestFramework class.
+class ExampleTest(OroTestFramework):
+    # Each functional test is a subclass of the OroTestFramework class.
 
     # Override the set_test_params(), add_options(), setup_chain(), setup_network()
     # and setup_nodes() methods to customize the test setup as required.
@@ -113,7 +113,7 @@ class ExampleTest(BitcoinTestFramework):
         # sync_all() should not include node2, since we're not expecting it to
         # sync.
         connect_nodes(self.nodes[0], 1)
-        self.sync_all([self.nodes[0:1]])
+        self.sync_all(self.nodes[0:1])
 
     # Use setup_nodes() to customize the node start behaviour (for example if
     # you don't want to start all nodes at the start of the test).
@@ -125,7 +125,7 @@ class ExampleTest(BitcoinTestFramework):
 
         Define it in a method here because you're going to use it repeatedly.
         If you think it's useful in general, consider moving it to the base
-        BitcoinTestFramework class so other tests can use it."""
+        OroTestFramework class so other tests can use it."""
 
         self.log.info("Running custom_method")
 
@@ -143,7 +143,7 @@ class ExampleTest(BitcoinTestFramework):
 
         # Generating a block on one of the nodes will get us out of IBD
         blocks = [int(self.nodes[0].generate(1)[0], 16)]
-        self.sync_all([self.nodes[0:1]])
+        self.sync_all(self.nodes[0:1])
 
         # Notice above how we called an RPC by calling a method with the same
         # name on the node object. Notice also how we used a keyword argument

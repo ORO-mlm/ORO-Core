@@ -9,11 +9,11 @@
 - Stop the node and restart it with -reindex-chainstate. Verify that the node has reindexed up to block 3.
 """
 
-from test_framework.test_framework import BitcoinTestFramework
-from test_framework.util import wait_until
+from test_framework.test_framework import OroTestFramework
+from test_framework.util import assert_equal
 import time
 
-class ReindexTest(BitcoinTestFramework):
+class ReindexTest(OroTestFramework):
 
     def set_test_params(self):
         self.setup_clean_chain = True
@@ -23,11 +23,9 @@ class ReindexTest(BitcoinTestFramework):
         self.nodes[0].generate(3)
         blockcount = self.nodes[0].getblockcount()
         self.stop_nodes()
-        time.sleep(5)
         extra_args = [["-reindex", "-checkblockindex=1"]]
         self.start_nodes(extra_args)
-        time.sleep(15)
-        wait_until(lambda: self.nodes[0].getblockcount() == blockcount)
+        assert_equal(self.nodes[0].getblockcount(), blockcount)  # start_node is blocking on reindex
         self.log.info("Success")
 
     def run_test(self):

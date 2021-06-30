@@ -5,10 +5,11 @@
 #ifndef REQUESTDIALOG_H
 #define REQUESTDIALOG_H
 
-#include <QDialog>
-#include <QPixmap>
-#include "walletmodel.h"
+#include "qt/oro/focuseddialog.h"
 #include "qt/oro/snackbar.h"
+#include "walletmodel.h"
+
+#include <QPixmap>
 
 class WalletModel;
 class OROGUI;
@@ -17,7 +18,7 @@ namespace Ui {
 class RequestDialog;
 }
 
-class RequestDialog : public QDialog
+class RequestDialog : public FocusedDialog
 {
     Q_OBJECT
 
@@ -30,21 +31,21 @@ public:
     void showEvent(QShowEvent *event) override;
     int res = -1;
 
-private slots:
-    void onNextClicked();
+private Q_SLOTS:
+    void accept() override;
     void onCopyClicked();
     void onCopyUriClicked();
 
 private:
-    Ui::RequestDialog *ui;
+    Ui::RequestDialog *ui{nullptr};
     int pos = 0;
     bool isPaymentRequest = true;
-    WalletModel *walletModel;
-    SnackBar *snackBar = nullptr;
+    WalletModel *walletModel{nullptr};
+    SnackBar *snackBar{nullptr};
     // Cached last address
-    SendCoinsRecipient *info = nullptr;
+    SendCoinsRecipient *info{nullptr};
 
-    QPixmap *qrImage = nullptr;
+    QPixmap *qrImage{nullptr};
 
     void updateQr(QString str);
     void inform(QString text);

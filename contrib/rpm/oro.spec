@@ -20,8 +20,8 @@ Summary:	Peer to Peer Cryptographic Currency
 
 Group:		Applications/System
 License:	MIT
-URL:		https://oro.cm/
-Source0:	https://oro.cm/bin/oro-core-%{version}/oro-%{version}.tar.gz
+URL:		https://oro.exchange/
+Source0:	https://oro.exchange/bin/oro-core-%{version}/oro-%{version}.tar.gz
 Source1:	http://download.oracle.com/berkeley-db/db-%{bdbv}.NC.tar.gz
 
 Source10:	https://raw.githubusercontent.com/oro-project/oro/v%{version}/contrib/debian/examples/oro.conf

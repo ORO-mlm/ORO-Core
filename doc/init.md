@@ -95,10 +95,10 @@ Installing Service Configuration
 
 Installing this .service file consists of just copying it to
 /usr/lib/systemd/system directory, followed by the command
-`systemctl daemon-reload` in order to update running systemd configuration.
+`systorotl daemon-reload` in order to update running systemd configuration.
 
-To test, run `systemctl start orod` and to enable for system startup run
-`systemctl enable orod`
+To test, run `systorotl start orod` and to enable for system startup run
+`systorotl enable orod`
 
 NOTE: When installing for systemd in Debian/Ubuntu the .service file needs to be copied to the /lib/systemd/system directory instead.
 

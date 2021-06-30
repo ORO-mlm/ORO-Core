@@ -234,7 +234,7 @@ debug.log file if inconsistencies are detected.
 
 Valgrind is a programming tool for memory debugging, memory leak detection, and
 profiling. The repo contains a Valgrind suppressions file
-([`valgrind.supp`](https://github.com/oro-project/oro/blob/master/contrib/valgrind.supp))
+([`valgrind.supp`](https://github.com/oro-cm/ORO/blob/master/contrib/valgrind.supp))
 which includes known Valgrind warnings in our dependencies that cannot be fixed
 in-tree. Example use:
 
@@ -673,7 +673,11 @@ Current subtrees include:
   - **Note**: Follow the instructions in [Upgrading LevelDB](#upgrading-leveldb) when
     merging upstream changes to the LevelDB subtree.
 
-- src/libsecp256k1
+- src/crc32c
+  - Used by leveldb for hardware acceleration of CRC32C checksums for data integrity.
+  - Upstream at https://github.com/google/crc32c ; Maintained by Google.
+
+- src/secp256k1
   - Upstream at https://github.com/bitcoin-core/secp256k1/ ; actively maintained by Core contributors.
 
 - src/univalue
@@ -903,3 +907,16 @@ A few guidelines for introducing and reviewing new RPC interfaces:
   - *Exception*: Using RPC method aliases may be appropriate in cases where a
     new RPC is replacing a deprecated RPC, to avoid both RPCs confusingly
     showing up in the command list.
+
+- Wallet RPCs call BlockUntilSyncedToCurrentChain to maintain consistency with
+  `getblockchaininfo`'s state immediately prior to the call's execution. Wallet
+  RPCs whose behavior does *not* depend on the current chainstate may omit this
+  call.
+
+  - *Rationale*: In previous versions of Bitcoin Core, the wallet was always
+    in-sync with the chainstate (by virtue of them all being updated in the
+    same cs_main lock). In order to maintain the behavior that wallet RPCs
+    return results as of at least the highest best-known block an RPC
+    client may be aware of prior to entering a wallet RPC call, we must block
+    until the wallet is caught up to the chainstate as of the RPC call's entry.
+    This also makes the API much easier for RPC clients to reason about.

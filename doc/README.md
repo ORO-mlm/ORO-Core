@@ -3,7 +3,7 @@ ORO Core
 
 Setup
 ---------------------
-[ORO Core](http://oro.cm/wallet) is the original ORO client and it builds the backbone of the network. However, it downloads and stores the entire history of ORO transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[ORO Core](http://oro.exchange/wallet) is the original ORO client and it builds the backbone of the network. However, it downloads and stores the entire history of ORO transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
@@ -16,6 +16,8 @@ Unpack the files into a directory and run:
 - `bin/oro-qt` (GUI) or
 - `bin/orod` (headless)
 
+If this is the first time running ORO Core (since v5.0.0), you'll need to install the sapling params by running the included `install-params.sh` script, which copies the two params files to `$HOME/.oro-params`
+
 ### Windows
 
 Unpack the files into a directory, and then run oro-qt.exe.
@@ -26,10 +28,10 @@ Drag ORO-Qt to your applications folder, and then run ORO-Qt.
 
 ### Need Help?
 
-* See the documentation at the [ORO Wiki](https://github.com/ORO-Project/ORO/wiki)
+* See the documentation at the [ORO Wiki](https://github.com/oro-cm/ORO/wiki)
 for help and more information.
-* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [ORO Forum](http://forum.oro.cm/).
-* Join our Discord server [Discord Server](https://discord.oro.cm)
+* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [ORO Forum](http://forum.oro.exchange/).
+* Join our Discord server [Discord Server](https://discord.oro.exchange)
 
 Building
 ---------------------
@@ -49,19 +51,20 @@ The ORO repo's [root README](/README.md) contains relevant information on the de
 - [Multiwallet Qt Development](multiwallet-qt.md)
 - [Release Notes](release-notes.md)
 - [Release Process](release-process.md)
-- [Source Code Documentation (External Link)](https://www.fuzzbawls.pw/oro/doxygen/)
+- [Source Code Documentation (External Link)](https://www.oro.exchange/oro/doxygen/)
 - [Translation Process](translation_process.md)
 - [Unit Tests](unit-tests.md)
 - [Unauthenticated REST Interface](REST-interface.md)
 - [Dnsseed Policy](dnsseed-policy.md)
 
 ### Resources
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [ORO](http://forum.oro.cm/) forum.
-* Join the [ORO Discord](https://discord.oro.cm).
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [ORO](http://forum.oro.exchange/) forum.
+* Join the [ORO Discord](https://discord.oro.exchange).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)
 - [Files](files.md)
+- [Reduce Memory](reduce-memory.md)
 - [Tor Support](tor.md)
 - [Init Scripts (systemd/upstart/openrc)](init.md)
 

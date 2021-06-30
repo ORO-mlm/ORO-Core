@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The ORO developers
+// Copyright (c) 2019-2020 The ORO developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,26 +10,30 @@
 
 #include "qt/guiutil.h"
 #include "clientmodel.h"
+#include "interfaces/handler.h"
 #include "optionsmodel.h"
 #include "networkstyle.h"
 #include "notificator.h"
 #include "guiinterface.h"
 #include "qt/oro/qtutils.h"
 #include "qt/oro/defaultdialog.h"
-#include "qt/oro/settings/settingsfaqwidget.h"
 
-#include <QHBoxLayout>
-#include <QVBoxLayout>
+#include "init.h"
+#include "util.h"
+
 #include <QApplication>
 #include <QColor>
-#include <QShortcut>
+#include <QHBoxLayout>
 #include <QKeySequence>
+#include <QScreen>
+#include <QShortcut>
 #include <QWindowStateChangeEvent>
 
-#include "util.h"
 
 #define BASE_WINDOW_WIDTH 1200
 #define BASE_WINDOW_HEIGHT 740
+#define BASE_WINDOW_MIN_HEIGHT 620
+#define BASE_WINDOW_MIN_WIDTH 1100
 
 
 const QString OROGUI::DEFAULT_WALLET = "~Default";
@@ -40,38 +44,43 @@ OROGUI::OROGUI(const NetworkStyle* networkStyle, QWidget* parent) :
 
     /* Open CSS when configured */
     this->setStyleSheet(GUIUtil::loadStyleSheet());
-    this->setMinimumSize(BASE_WINDOW_WIDTH, BASE_WINDOW_HEIGHT);
-    GUIUtil::restoreWindowGeometry("nWindow", QSize(BASE_WINDOW_WIDTH, BASE_WINDOW_HEIGHT), this);
+    this->setMinimumSize(BASE_WINDOW_MIN_WIDTH, BASE_WINDOW_MIN_HEIGHT);
+
+
+    // Adapt screen size
+    QRect rec = QGuiApplication::primaryScreen()->geometry();
+    int adaptedHeight = (rec.height() < BASE_WINDOW_HEIGHT) ?  BASE_WINDOW_MIN_HEIGHT : BASE_WINDOW_HEIGHT;
+    int adaptedWidth = (rec.width() < BASE_WINDOW_WIDTH) ?  BASE_WINDOW_MIN_WIDTH : BASE_WINDOW_WIDTH;
+    GUIUtil::restoreWindowGeometry(
+            "nWindow",
+            QSize(adaptedWidth, adaptedHeight),
+            this
+    );
 
 #ifdef ENABLE_WALLET
     /* if compiled with wallet support, -disablewallet can still disable the wallet */
-    enableWallet = !GetBoolArg("-disablewallet", false);
+    enableWallet = !gArgs.GetBoolArg("-disablewallet", false);
 #else
     enableWallet = false;
 #endif // ENABLE_WALLET
 
-    QString windowTitle = tr("ORO Core") + " - ";
-    windowTitle += ((enableWallet) ? tr("Wallet") : tr("Node"));
+    QString windowTitle = QString::fromStdString(gArgs.GetArg("-windowtitle", ""));
+    if (windowTitle.isEmpty()) {
+        windowTitle = tr("ORO Core") + " - ";
+        windowTitle += ((enableWallet) ? tr("Wallet") : tr("Node"));
+    }
     windowTitle += " " + networkStyle->getTitleAddText();
     setWindowTitle(windowTitle);
 
-#ifndef Q_OS_MAC
     QApplication::setWindowIcon(networkStyle->getAppIcon());
     setWindowIcon(networkStyle->getAppIcon());
-#else
-    MacDockIconHandler::instance()->setIcon(networkStyle->getAppIcon());
-#endif
-
-
-
 
 #ifdef ENABLE_WALLET
     // Create wallet frame
-    if(enableWallet){
-
+    if (enableWallet) {
         QFrame* centralWidget = new QFrame(this);
-        this->setMinimumWidth(BASE_WINDOW_WIDTH);
-        this->setMinimumHeight(BASE_WINDOW_HEIGHT);
+        this->setMinimumWidth(BASE_WINDOW_MIN_WIDTH);
+        this->setMinimumHeight(BASE_WINDOW_MIN_HEIGHT);
         QHBoxLayout* centralWidgetLayouot = new QHBoxLayout();
         centralWidget->setLayout(centralWidgetLayouot);
         centralWidgetLayouot->setContentsMargins(0,0,0,0);
@@ -115,7 +124,6 @@ OROGUI::OROGUI(const NetworkStyle* networkStyle, QWidget* parent) :
         sendWidget = new SendWidget(this);
         receiveWidget = new ReceiveWidget(this);
         addressesWidget = new AddressesWidget(this);
-        privacyWidget = new PrivacyWidget(this);
         masterNodesWidget = new MasterNodesWidget(this);
         coldStakingWidget = new ColdStakingWidget(this);
         settingsWidget = new SettingsWidget(this);
@@ -125,7 +133,6 @@ OROGUI::OROGUI(const NetworkStyle* networkStyle, QWidget* parent) :
         stackedContainer->addWidget(sendWidget);
         stackedContainer->addWidget(receiveWidget);
         stackedContainer->addWidget(addressesWidget);
-        stackedContainer->addWidget(privacyWidget);
         stackedContainer->addWidget(masterNodesWidget);
         stackedContainer->addWidget(coldStakingWidget);
         stackedContainer->addWidget(settingsWidget);
@@ -158,7 +165,8 @@ OROGUI::OROGUI(const NetworkStyle* networkStyle, QWidget* parent) :
 
 }
 
-void OROGUI::createActions(const NetworkStyle* networkStyle){
+void OROGUI::createActions(const NetworkStyle* networkStyle)
+{
     toggleHideAction = new QAction(networkStyle->getAppIcon(), tr("&Show / Hide"), this);
     toggleHideAction->setStatusTip(tr("Show or hide the main Window"));
 
@@ -167,14 +175,15 @@ void OROGUI::createActions(const NetworkStyle* networkStyle){
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
 
-    connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
-    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(toggleHideAction, &QAction::triggered, this, &OROGUI::toggleHidden);
+    connect(quitAction, &QAction::triggered, qApp, &QApplication::quit);
 }
 
 /**
  * Here add every event connection
  */
-void OROGUI::connectActions() {
+void OROGUI::connectActions()
+{
     QShortcut *consoleShort = new QShortcut(this);
     consoleShort->setKey(QKeySequence(SHORT_KEY + Qt::Key_C));
     connect(consoleShort, &QShortcut::activated, [this](){
@@ -189,7 +198,6 @@ void OROGUI::connectActions() {
     connect(sendWidget, &SendWidget::showHide, this, &OROGUI::showHide);
     connect(receiveWidget, &ReceiveWidget::showHide, this, &OROGUI::showHide);
     connect(addressesWidget, &AddressesWidget::showHide, this, &OROGUI::showHide);
-    connect(privacyWidget, &PrivacyWidget::showHide, this, &OROGUI::showHide);
     connect(masterNodesWidget, &MasterNodesWidget::showHide, this, &OROGUI::showHide);
     connect(masterNodesWidget, &MasterNodesWidget::execDialog, this, &OROGUI::execDialog);
     connect(coldStakingWidget, &ColdStakingWidget::showHide, this, &OROGUI::showHide);
@@ -198,7 +206,8 @@ void OROGUI::connectActions() {
 }
 
 
-void OROGUI::createTrayIcon(const NetworkStyle* networkStyle) {
+void OROGUI::createTrayIcon(const NetworkStyle* networkStyle)
+{
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
     QString toolTip = tr("ORO Core client") + " " + networkStyle->getTitleAddText();
@@ -209,8 +218,8 @@ void OROGUI::createTrayIcon(const NetworkStyle* networkStyle) {
     notificator = new Notificator(QApplication::applicationName(), trayIcon, this);
 }
 
-//
-OROGUI::~OROGUI() {
+OROGUI::~OROGUI()
+{
     // Unsubscribe from notifications from core
     unsubscribeFromCoreSignals();
 
@@ -224,16 +233,17 @@ OROGUI::~OROGUI() {
 
 
 /** Get restart command-line parameters and request restart */
-void OROGUI::handleRestart(QStringList args){
+void OROGUI::handleRestart(QStringList args)
+{
     if (!ShutdownRequested())
-        emit requestedRestart(args);
+        Q_EMIT requestedRestart(args);
 }
 
 
-void OROGUI::setClientModel(ClientModel* clientModel) {
-    this->clientModel = clientModel;
-    if(this->clientModel) {
-
+void OROGUI::setClientModel(ClientModel* _clientModel)
+{
+    this->clientModel = _clientModel;
+    if (this->clientModel) {
         // Create system tray menu (or setup the dock menu) that late to prevent users from calling actions,
         // while the client has not yet fully loaded
         createTrayIconMenu();
@@ -244,9 +254,12 @@ void OROGUI::setClientModel(ClientModel* clientModel) {
         settingsWidget->setClientModel(clientModel);
 
         // Receive and report messages from client model
-        connect(clientModel, SIGNAL(message(QString, QString, unsigned int)), this, SLOT(message(QString, QString, unsigned int)));
-        connect(topBar, SIGNAL(walletSynced(bool)), dashboard, SLOT(walletSynced(bool)));
-        connect(topBar, SIGNAL(walletSynced(bool)), coldStakingWidget, SLOT(walletSynced(bool)));
+        connect(clientModel, &ClientModel::message, this, &OROGUI::message);
+        connect(clientModel, &ClientModel::alertsChanged, [this](const QString& _alertStr) {
+            message(tr("Alert!"), _alertStr, CClientUIInterface::MSG_WARNING);
+        });
+        connect(topBar, &TopBar::walletSynced, dashboard, &DashboardWidget::walletSynced);
+        connect(topBar, &TopBar::walletSynced, coldStakingWidget, &ColdStakingWidget::walletSynced);
 
         // Get restart command-line parameters and handle restart
         connect(settingsWidget, &SettingsWidget::handleRestart, [this](QStringList arg){handleRestart(arg);});
@@ -268,29 +281,31 @@ void OROGUI::setClientModel(ClientModel* clientModel) {
     }
 }
 
-void OROGUI::createTrayIconMenu() {
+void OROGUI::createTrayIconMenu()
+{
 #ifndef Q_OS_MAC
-    // return if trayIcon is unset (only on non-Mac OSes)
+    // return if trayIcon is unset (only on non-macOSes)
     if (!trayIcon)
         return;
 
     trayIconMenu = new QMenu(this);
     trayIcon->setContextMenu(trayIconMenu);
 
-    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-            this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
+    connect(trayIcon, &QSystemTrayIcon::activated, this, &OROGUI::trayIconActivated);
 #else
-    // Note: On Mac, the dock icon is used to provide the tray's functionality.
+    // Note: On macOS, the Dock icon is used to provide the tray's functionality.
     MacDockIconHandler* dockIconHandler = MacDockIconHandler::instance();
-    dockIconHandler->setMainWindow((QMainWindow*)this);
-    trayIconMenu = dockIconHandler->dockMenu();
+    connect(dockIconHandler, &MacDockIconHandler::dockIconClicked, this, &OROGUI::macosDockIconActivated);
+
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->setAsDockMenu();
 #endif
 
-    // Configuration of the tray icon (or dock icon) icon menu
+    // Configuration of the tray icon (or Dock icon) icon menu
     trayIconMenu->addAction(toggleHideAction);
     trayIconMenu->addSeparator();
 
-#ifndef Q_OS_MAC // This is built-in on Mac
+#ifndef Q_OS_MAC // This is built-in on macOS
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
 #endif
@@ -304,6 +319,12 @@ void OROGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
         toggleHidden();
     }
 }
+#else
+void OROGUI::macosDockIconActivated()
+ {
+     show();
+     activateWindow();
+ }
 #endif
 
 void OROGUI::changeEvent(QEvent* e)
@@ -314,7 +335,7 @@ void OROGUI::changeEvent(QEvent* e)
         if (clientModel && clientModel->getOptionsModel() && clientModel->getOptionsModel()->getMinimizeToTray()) {
             QWindowStateChangeEvent* wsevt = static_cast<QWindowStateChangeEvent*>(e);
             if (!(wsevt->oldState() & Qt::WindowMinimized) && isMinimized()) {
-                QTimer::singleShot(0, this, SLOT(hide()));
+                QTimer::singleShot(0, this, &OROGUI::hide);
                 e->ignore();
             }
         }
@@ -335,15 +356,17 @@ void OROGUI::closeEvent(QCloseEvent* event)
 }
 
 
-void OROGUI::messageInfo(const QString& text){
-    if(!this->snackBar) this->snackBar = new SnackBar(this, this);
+void OROGUI::messageInfo(const QString& text)
+{
+    if (!this->snackBar) this->snackBar = new SnackBar(this, this);
     this->snackBar->setText(text);
     this->snackBar->resize(this->width(), snackBar->height());
     openDialog(this->snackBar, this);
 }
 
 
-void OROGUI::message(const QString& title, const QString& message, unsigned int style, bool* ret) {
+void OROGUI::message(const QString& title, const QString& message, unsigned int style, bool* ret)
+{
     QString strTitle =  tr("ORO Core"); // default title
     // Default to information icon
     int nNotifyIcon = Notificator::Information;
@@ -382,26 +405,27 @@ void OROGUI::message(const QString& title, const QString& message, unsigned int 
         // Check for buttons, use OK as default, if none was supplied
         int r = 0;
         showNormalIfMinimized();
-        if(style & CClientUIInterface::BTN_MASK){
+        if (style & CClientUIInterface::BTN_MASK) {
             r = openStandardDialog(
                     (title.isEmpty() ? strTitle : title), message, "OK", "CANCEL"
                 );
-        }else{
+        } else {
             r = openStandardDialog((title.isEmpty() ? strTitle : title), message, "OK");
         }
         if (ret != NULL)
             *ret = r;
-    } else if(style & CClientUIInterface::MSG_INFORMATION_SNACK){
+    } else if (style & CClientUIInterface::MSG_INFORMATION_SNACK) {
         messageInfo(message);
-    }else {
+    } else {
         // Append title to "ORO - "
         if (!msgType.isEmpty())
             strTitle += " - " + msgType;
-        notificator->notify((Notificator::Class) nNotifyIcon, strTitle, message);
+        notificator->notify(static_cast<Notificator::Class>(nNotifyIcon), strTitle, message);
     }
 }
 
-bool OROGUI::openStandardDialog(QString title, QString body, QString okBtn, QString cancelBtn){
+bool OROGUI::openStandardDialog(QString title, QString body, QString okBtn, QString cancelBtn)
+{
     DefaultDialog *dialog;
     if (isVisible()) {
         showHide(true);
@@ -423,28 +447,24 @@ bool OROGUI::openStandardDialog(QString title, QString body, QString okBtn, QStr
 }
 
 
-void OROGUI::showNormalIfMinimized(bool fToggleHidden) {
+void OROGUI::showNormalIfMinimized(bool fToggleHidden)
+{
     if (!clientModel)
         return;
-    // activateWindow() (sometimes) helps with keyboard focus on Windows
-    if (isHidden()) {
-        show();
-        activateWindow();
-    } else if (isMinimized()) {
-        showNormal();
-        activateWindow();
-    } else if (GUIUtil::isObscured(this)) {
-        raise();
-        activateWindow();
-    } else if (fToggleHidden)
+    if (!isHidden() && !isMinimized() && !GUIUtil::isObscured(this) && fToggleHidden) {
         hide();
+    } else {
+        GUIUtil::bringToFront(this);
+    }
 }
 
-void OROGUI::toggleHidden() {
+void OROGUI::toggleHidden()
+{
     showNormalIfMinimized(true);
 }
 
-void OROGUI::detectShutdown() {
+void OROGUI::detectShutdown()
+{
     if (ShutdownRequested()) {
         if (rpcConsole)
             rpcConsole->hide();
@@ -452,30 +472,31 @@ void OROGUI::detectShutdown() {
     }
 }
 
-void OROGUI::goToDashboard(){
-    if(stackedContainer->currentWidget() != dashboard){
+void OROGUI::goToDashboard()
+{
+    if (stackedContainer->currentWidget() != dashboard) {
         stackedContainer->setCurrentWidget(dashboard);
         topBar->showBottom();
     }
 }
 
-void OROGUI::goToSend(){
+void OROGUI::goToSend()
+{
     showTop(sendWidget);
 }
 
-void OROGUI::goToAddresses(){
+void OROGUI::goToAddresses()
+{
     showTop(addressesWidget);
 }
 
-void OROGUI::goToPrivacy(){
-    showTop(privacyWidget);
-}
-
-void OROGUI::goToMasterNodes(){
+void OROGUI::goToMasterNodes()
+{
     showTop(masterNodesWidget);
 }
 
-void OROGUI::goToColdStaking(){
+void OROGUI::goToColdStaking()
+{
     showTop(coldStakingWidget);
 }
 
@@ -483,51 +504,69 @@ void OROGUI::goToSettings(){
     showTop(settingsWidget);
 }
 
-void OROGUI::goToReceive(){
+void OROGUI::goToSettingsInfo()
+{
+    navMenu->selectSettings();
+    settingsWidget->showInformation();
+    goToSettings();
+}
+
+void OROGUI::goToReceive()
+{
     showTop(receiveWidget);
 }
 
-void OROGUI::showTop(QWidget* view){
-    if(stackedContainer->currentWidget() != view){
+void OROGUI::openNetworkMonitor()
+{
+    settingsWidget->openNetworkMonitor();
+}
+
+void OROGUI::showTop(QWidget* view)
+{
+    if (stackedContainer->currentWidget() != view) {
         stackedContainer->setCurrentWidget(view);
         topBar->showTop();
     }
 }
 
-void OROGUI::changeTheme(bool isLightTheme){
+void OROGUI::changeTheme(bool isLightTheme)
+{
 
     QString css = GUIUtil::loadStyleSheet();
     this->setStyleSheet(css);
 
     // Notify
-    emit themeChanged(isLightTheme, css);
+    Q_EMIT themeChanged(isLightTheme, css);
 
     // Update style
     updateStyle(this);
 }
 
-void OROGUI::resizeEvent(QResizeEvent* event){
+void OROGUI::resizeEvent(QResizeEvent* event)
+{
     // Parent..
     QMainWindow::resizeEvent(event);
     // background
     showHide(opEnabled);
     // Notify
-    emit windowResizeEvent(event);
+    Q_EMIT windowResizeEvent(event);
 }
 
-bool OROGUI::execDialog(QDialog *dialog, int xDiv, int yDiv){
+bool OROGUI::execDialog(QDialog *dialog, int xDiv, int yDiv)
+{
     return openDialogWithOpaqueBackgroundY(dialog, this);
 }
 
-void OROGUI::showHide(bool show){
-    if(!op) op = new QLabel(this);
-    if(!show){
+void OROGUI::showHide(bool show)
+{
+    if (!op) op = new QLabel(this);
+    if (!show) {
         op->setVisible(false);
         opEnabled = false;
-    }else{
+    } else {
         QColor bg("#000000");
         bg.setAlpha(200);
-        if(!isLightTheme()){
+        if (!isLightTheme()) {
             bg = QColor("#00000000");
             bg.setAlpha(150);
         }
@@ -546,14 +585,16 @@ void OROGUI::showHide(bool show){
     }
 }
 
-int OROGUI::getNavWidth(){
+int OROGUI::getNavWidth()
+{
     return this->navMenu->width();
 }
 
-void OROGUI::openFAQ(int section){
+void OROGUI::openFAQ(SettingsFaqWidget::Section section)
+{
     showHide(true);
     SettingsFaqWidget* dialog = new SettingsFaqWidget(this);
-    if (section > 0) dialog->setSection(section);
+    dialog->setSection(section);
     openDialogWithOpaqueBackgroundFullScreen(dialog, this);
     dialog->deleteLater();
 }
@@ -563,7 +604,7 @@ void OROGUI::openFAQ(int section){
 bool OROGUI::addWallet(const QString& name, WalletModel* walletModel)
 {
     // Single wallet supported for now..
-    if(!stackedContainer || !clientModel || !walletModel)
+    if (!stackedContainer || !clientModel || !walletModel)
         return false;
 
     // set the model for every view
@@ -573,15 +614,14 @@ bool OROGUI::addWallet(const QString& name, WalletModel* walletModel)
     receiveWidget->setWalletModel(walletModel);
     sendWidget->setWalletModel(walletModel);
     addressesWidget->setWalletModel(walletModel);
-    privacyWidget->setWalletModel(walletModel);
     masterNodesWidget->setWalletModel(walletModel);
     coldStakingWidget->setWalletModel(walletModel);
     settingsWidget->setWalletModel(walletModel);
 
     // Connect actions..
-    connect(privacyWidget, &PrivacyWidget::message, this, &OROGUI::message);
+    connect(walletModel, &WalletModel::message, this, &OROGUI::message);
     connect(masterNodesWidget, &MasterNodesWidget::message, this, &OROGUI::message);
-    connect(coldStakingWidget, &MasterNodesWidget::message, this, &OROGUI::message);
+    connect(coldStakingWidget, &ColdStakingWidget::message, this, &OROGUI::message);
     connect(topBar, &TopBar::message, this, &OROGUI::message);
     connect(sendWidget, &SendWidget::message,this, &OROGUI::message);
     connect(receiveWidget, &ReceiveWidget::message,this, &OROGUI::message);
@@ -589,23 +629,26 @@ bool OROGUI::addWallet(const QString& name, WalletModel* walletModel)
     connect(settingsWidget, &SettingsWidget::message, this, &OROGUI::message);
 
     // Pass through transaction notifications
-    connect(dashboard, SIGNAL(incomingTransaction(QString, int, CAmount, QString, QString)), this, SLOT(incomingTransaction(QString, int, CAmount, QString, QString)));
+    connect(dashboard, &DashboardWidget::incomingTransaction, this, &OROGUI::incomingTransaction);
 
     return true;
 }
 
-bool OROGUI::setCurrentWallet(const QString& name) {
+bool OROGUI::setCurrentWallet(const QString& name)
+{
     // Single wallet supported.
     return true;
 }
 
-void OROGUI::removeAllWallets() {
+void OROGUI::removeAllWallets()
+{
     // Single wallet supported.
 }
 
-void OROGUI::incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address) {
+void OROGUI::incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address)
+{
     // Only send notifications when not disabled
-    if(!bdisableSystemnotifications){
+    if (!bdisableSystemnotifications) {
         // On new transaction, make an info balloon
         message((amount) < 0 ? (pwalletMain->fMultiSendNotify == true ? tr("Sent MultiSend transaction") : tr("Sent transaction")) : tr("Incoming transaction"),
             tr("Date: %1\n"
@@ -647,11 +690,11 @@ static bool ThreadSafeMessageBox(OROGUI* gui, const std::string& message, const 
 void OROGUI::subscribeToCoreSignals()
 {
     // Connect signals to client
-    uiInterface.ThreadSafeMessageBox.connect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
+    m_handler_message_box = interfaces::MakeHandler(uiInterface.ThreadSafeMessageBox.connect(std::bind(ThreadSafeMessageBox, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
 }
 
 void OROGUI::unsubscribeFromCoreSignals()
 {
     // Disconnect signals from client
-    uiInterface.ThreadSafeMessageBox.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
+    m_handler_message_box->disconnect();
 }

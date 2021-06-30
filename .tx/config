@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[oro-project-translations.qt-translation-51x]
+file_filter = src/qt/locale/oro_<lang>.ts
+source_file = src/qt/locale/oro_en.ts
+source_lang = en

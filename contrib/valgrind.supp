@@ -9,7 +9,7 @@
 #       --show-leak-kinds=all src/test/test_oro --log_level=test_suite
 {
    Suppress libstdc++ warning - https://gcc.gnu.org/bugzilla/show_bug.cgi?id=65434
-   Memcheck:Leak
+   Moroheck:Leak
    match-leak-kinds: reachable
    fun:malloc
    obj:*/libstdc++.*
@@ -20,7 +20,7 @@
 }
 {
    Suppress libdb warning - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=662917
-   Memcheck:Cond
+   Moroheck:Cond
    obj:*/libdb_cxx-*.so
    fun:__log_put
    obj:*/libdb_cxx-*.so
@@ -28,14 +28,14 @@
 }
 {
    Suppress leveldb warning (leveldb::InitModule()) - https://github.com/google/leveldb/issues/113
-   Memcheck:Leak
+   Moroheck:Leak
    match-leak-kinds: reachable
    fun:_Znwm
    fun:_ZN7leveldbL10InitModuleEv
 }
 {
    Suppress leveldb warning (leveldb::Env::Default()) - https://github.com/google/leveldb/issues/113
-   Memcheck:Leak
+   Moroheck:Leak
    match-leak-kinds: reachable
    fun:_Znwm
    ...

@@ -52,16 +52,16 @@ Node1 is unused in tests 3-7:
 """
 
 from test_framework.mininode import *
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import OroTestFramework
 from test_framework.util import *
 import time
 from test_framework.blocktools import create_block, create_coinbase, create_transaction
 
-class AcceptBlockTest(BitcoinTestFramework):
+class AcceptBlockTest(OroTestFramework):
     def add_options(self, parser):
         parser.add_option("--testbinary", dest="testbinary",
-                          default=os.getenv("BITCOIND", "bitcoind"),
-                          help="bitcoind binary to test")
+                          default=os.getenv("BITCOIND", "orod"),
+                          help="orod binary to test")
 
     def set_test_params(self):
         self.setup_clean_chain = True
@@ -316,7 +316,7 @@ class AcceptBlockTest(BitcoinTestFramework):
 
         # 9. Connect node1 to node0 and ensure it is able to sync
         connect_nodes(self.nodes[0], 1)
-        sync_blocks([self.nodes[0], self.nodes[1]])
+        self.sync_blocks([self.nodes[0], self.nodes[1]])
         self.log.info("Successfully synced nodes 1 and 0")
 
 if __name__ == '__main__':

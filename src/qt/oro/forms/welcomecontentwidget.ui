@@ -267,7 +267,7 @@
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>16777215</width>
+                   <width>140</width>
                    <height>1</height>
                   </size>
                  </property>
@@ -343,7 +343,7 @@
                  </layout>
                 </widget>
                </item>
-               <item>
+               <!-- <item>
                 <widget class="QLabel" name="labelLine2">
                  <property name="minimumSize">
                   <size>
@@ -353,7 +353,7 @@
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>16777215</width>
+                   <width>140</width>
                    <height>1</height>
                   </size>
                  </property>
@@ -364,8 +364,8 @@
                   <string/>
                  </property>
                 </widget>
-               </item>
-               <item>
+               </item> -->
+               <!-- <item>
                 <widget class="QWidget" name="layoutIcon3_2" native="true">
                  <property name="minimumSize">
                   <size>
@@ -439,7 +439,7 @@
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>16777215</width>
+                   <width>160</width>
                    <height>1</height>
                   </size>
                  </property>
@@ -514,7 +514,7 @@
                   </item>
                  </layout>
                 </widget>
-               </item>
+               </item> -->
                <item>
                 <spacer name="horizontalSpacer_8">
                  <property name="orientation">
@@ -667,7 +667,7 @@
                     </property>
                    </widget>
                   </item>
-                  <item>
+                  <!-- <item>
                    <spacer name="horizontalSpacer_3">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
@@ -679,8 +679,8 @@
                      </size>
                     </property>
                    </spacer>
-                  </item>
-                  <item>
+                  </item> -->
+                  <!-- <item>
                    <widget class="QPushButton" name="pushName3">
                     <property name="minimumSize">
                      <size>
@@ -715,7 +715,7 @@
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>40</width>
+                      <width>20</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -725,7 +725,7 @@
                    <widget class="QPushButton" name="pushName4">
                     <property name="minimumSize">
                      <size>
-                      <width>110</width>
+                      <width>150</width>
                       <height>0</height>
                      </size>
                     </property>
@@ -748,7 +748,7 @@
                      <bool>false</bool>
                     </property>
                    </widget>
-                  </item>
+                  </item> -->
                   <item>
                    <spacer name="horizontalSpacer_6">
                     <property name="orientation">
@@ -759,7 +759,7 @@
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>96</width>
+                      <width>76</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -963,7 +963,7 @@ ORO Core Wallet</string>
                    <item alignment="Qt::AlignHCenter">
                     <widget class="QLabel" name="labelMessage2">
                      <property name="text">
-                      <string>ORO is the world's most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</string>
+                      <string>ORO is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -991,7 +991,7 @@ ORO Core Wallet</string>
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="page_3">
+              <!-- <widget class="QWidget" name="page_3">
                <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,3">
                 <property name="spacing">
                  <number>6</number>
@@ -1163,7 +1163,7 @@ ORO Core Wallet</string>
                  </spacer>
                 </item>
                </layout>
-              </widget>
+              </widget> -->
              </widget>
             </item>
            </layout>

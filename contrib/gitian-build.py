@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2018-2019 The Bitcoin Core developers
-# Copyright (c) 2019 The ORO developers
+# Copyright (c) 2019-2020 The ORO developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -57,10 +57,10 @@ def setup_linux():
                     subprocess.check_call(['sudo', 'yum-config-manager', '--add-repo', repourl])
                 subprocess.check_call(['sudo', pkgmgr, 'install', '-y'] + dockers)
                 subprocess.check_call(['sudo', 'usermod', '-aG', 'docker', user])
-                subprocess.check_call(['sudo', 'systemctl', 'enable', 'docker'])
+                subprocess.check_call(['sudo', 'systorotl', 'enable', 'docker'])
                 print('Docker installed, restart your computer and re-run this script to continue the setup process.')
                 sys.exit(0)
-            subprocess.check_call(['sudo', 'systemctl', 'start', 'docker'])
+            subprocess.check_call(['sudo', 'systorotl', 'start', 'docker'])
         else:
             print('LXC not supported with Fedora/CentOS yet.')
             sys.exit(1)
@@ -120,7 +120,7 @@ def setup_repos():
     if args.host_os == 'darwin':
         subprocess.check_call(['sed', '-i.old', '/50cacher/d', 'bin/make-base-vm'])
     if args.host_os == 'linux':
-        if args.is_fedora or args.is_centos:
+        if args.is_fedora or args.is_centos or args.is_wsl:
             subprocess.check_call(['sed', '-i', '/50cacher/d', 'bin/make-base-vm'])
     subprocess.check_call(make_image_prog)
     subprocess.check_call(['git', 'checkout', 'bin/make-base-vm'])
@@ -142,10 +142,8 @@ def build():
     os.chdir('gitian-builder')
     os.makedirs('inputs', exist_ok=True)
 
-    subprocess.check_call(['wget', '-N', '-P', 'inputs', 'https://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz'])
-    subprocess.check_call(['wget', '-N', '-P', 'inputs', 'https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch'])
-    subprocess.check_call(["echo 'a8c4e9cafba922f89de0df1f2152e7be286aba73f78505169bc351a7938dd911 inputs/osslsigncode-Backports-to-1.7.1.patch' | sha256sum -c"], shell=True)
-    subprocess.check_call(["echo 'f9a8cdb38b9c309326764ebc937cba1523a3a751a7ab05df3ecc99d18ae466c9 inputs/osslsigncode-1.7.1.tar.gz' | sha256sum -c"], shell=True)
+    subprocess.check_call(['wget', '-O', 'inputs/osslsigncode-2.0.tar.gz', 'https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz'])
+    subprocess.check_call(["echo '5a60e0a4b3e0b4d655317b2f12a810211c50242138322b16e7e01c6fbb89d92f inputs/osslsigncode-2.0.tar.gz' | sha256sum -c"], shell=True)
     subprocess.check_call(['make', '-C', '../oro/depends', 'download', 'SOURCES_PATH=' + os.getcwd() + '/cache/common'])
 
     if args.linux:
@@ -288,12 +286,15 @@ def main():
         args.is_bionic = False
         args.is_fedora = False
         args.is_centos = False
+        args.is_wsl    = False
         if os.path.isfile('/usr/bin/lsb_release'):
             args.is_bionic = b'bionic' in subprocess.check_output(['lsb_release', '-cs'])
         if os.path.isfile('/etc/fedora-release'):
             args.is_fedora = True
         if os.path.isfile('/etc/centos-release'):
             args.is_centos = True
+        if os.path.isfile('/proc/version') and open('/proc/version', 'r').read().find('Microsoft'):
+            args.is_wsl = True
 
     if args.kvm and args.docker:
         raise Exception('Error: cannot have both kvm and docker')

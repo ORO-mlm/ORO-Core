@@ -32,8 +32,8 @@ X509 *parse_b64der_cert(const char* cert_data)
 static SendCoinsRecipient handleRequest(PaymentServer* server, std::vector<unsigned char>& data)
 {
     RecipientCatcher sigCatcher;
-    QObject::connect(server, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
-        &sigCatcher, SLOT(getRecipient(SendCoinsRecipient)));
+    QObject::connect(server, &PaymentServer::receivedPaymentRequest,
+                     &sigCatcher, &RecipientCatcher::getRecipient);
 
     // Write data to a temp file:
     QTemporaryFile f;
@@ -50,8 +50,8 @@ static SendCoinsRecipient handleRequest(PaymentServer* server, std::vector<unsig
     // which will lead to a test failure anyway.
     QCoreApplication::sendEvent(&object, &event);
 
-    QObject::disconnect(server, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
-        &sigCatcher, SLOT(getRecipient(SendCoinsRecipient)));
+    QObject::disconnect(server, &PaymentServer::receivedPaymentRequest,
+                        &sigCatcher, &RecipientCatcher::getRecipient);
 
     // Return results from sigCatcher
     return sigCatcher.recipient;
@@ -107,17 +107,13 @@ void PaymentServerTests::paymentServerTests()
     r.paymentRequest.getMerchant(caStore, merchant);
     QCOMPARE(merchant, QString(""));
 
-    unsigned long lDoSProtectionTrigger = (unsigned long) BIP70_MAX_PAYMENTREQUEST_SIZE + 1;
-    std::string randData(lDoSProtectionTrigger, '\0');
+    // Test BIP70 DoS protection:
+    auto randdata = FastRandomContext().randbytes(BIP70_MAX_PAYMENTREQUEST_SIZE + 1);
 
-    unsigned char* buff = reinterpret_cast<unsigned char *>(&randData[0]);
-
-    // Just get some random data big enough to trigger BIP70 DoS protection
-    GetRandBytes(buff, sizeof(buff));
     // Write data to a temp file:
     QTemporaryFile tempFile;
     tempFile.open();
-    tempFile.write((const char*)buff, sizeof(buff));
+    tempFile.write((const char*)randdata.data(), randdata.size());
     tempFile.close();
     // Trigger BIP70 DoS protection
     QCOMPARE(PaymentServer::readPaymentRequestFromFile(tempFile.fileName(), r.paymentRequest), false);
@@ -125,7 +121,7 @@ void PaymentServerTests::paymentServerTests()
     delete server;
 }
 
-void RecipientCatcher::getRecipient(SendCoinsRecipient r)
+void RecipientCatcher::getRecipient(const SendCoinsRecipient& r)
 {
     recipient = r;
 }

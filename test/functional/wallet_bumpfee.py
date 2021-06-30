@@ -15,7 +15,7 @@ make assumptions about execution order.
 """
 
 from test_framework.blocktools import send_to_witness
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import OroTestFramework
 from test_framework import blocktools
 from test_framework.mininode import CTransaction
 from test_framework.util import *
@@ -29,7 +29,7 @@ WALLET_PASSPHRASE = "test"
 WALLET_PASSPHRASE_TIMEOUT = 3600
 
 
-class BumpFeeTest(BitcoinTestFramework):
+class BumpFeeTest(OroTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.setup_clean_chain = True
@@ -42,7 +42,7 @@ class BumpFeeTest(BitcoinTestFramework):
         self.start_node(1)
         self.nodes[1].walletpassphrase(WALLET_PASSPHRASE, WALLET_PASSPHRASE_TIMEOUT)
 
-        connect_nodes_bi(self.nodes, 0, 1)
+        connect_nodes(self.nodes[0], 1)
         self.sync_all()
 
         peer_node, rbf_node = self.nodes
@@ -61,7 +61,7 @@ class BumpFeeTest(BitcoinTestFramework):
 
         self.log.info("Running tests")
         dest_address = peer_node.getnewaddress()
-        test_simple_bumpfee_succeeds(rbf_node, peer_node, dest_address)
+        test_simple_bumpfee_succeeds(self, rbf_node, peer_node, dest_address)
         test_segwit_bumpfee_succeeds(rbf_node, dest_address)
         test_nonrbf_bumpfee_fails(peer_node, dest_address)
         test_notmine_bumpfee_fails(rbf_node, peer_node, dest_address)
@@ -77,16 +77,16 @@ class BumpFeeTest(BitcoinTestFramework):
         self.log.info("Success")
 
 
-def test_simple_bumpfee_succeeds(rbf_node, peer_node, dest_address):
+def test_simple_bumpfee_succeeds(test, rbf_node, peer_node, dest_address):
     rbfid = spend_one_input(rbf_node, dest_address)
     rbftx = rbf_node.gettransaction(rbfid)
-    sync_mempools((rbf_node, peer_node))
+    test.sync_mempools((rbf_node, peer_node))
     assert rbfid in rbf_node.getrawmempool() and rbfid in peer_node.getrawmempool()
     bumped_tx = rbf_node.bumpfee(rbfid)
     assert_equal(bumped_tx["errors"], [])
     assert bumped_tx["fee"] - abs(rbftx["fee"]) > 0
     # check that bumped_tx propagates, original tx was evicted and has a wallet conflict
-    sync_mempools((rbf_node, peer_node))
+    test.sync_mempools((rbf_node, peer_node))
     assert bumped_tx["txid"] in rbf_node.getrawmempool()
     assert bumped_tx["txid"] in peer_node.getrawmempool()
     assert rbfid not in rbf_node.getrawmempool()

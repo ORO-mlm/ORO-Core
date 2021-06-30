@@ -84,7 +84,7 @@ Examples:
     Trivial: Fix typo in init.cpp
 
 Note that translations should not be submitted as pull requests, please see
-[Translation Process](https://github.com/oro-project/oro/blob/master/doc/translation_process.md)
+[Translation Process](https://github.com/oro-cm/ORO/blob/master/doc/translation_process.md)
 for more information on helping with translations.
 
 If a pull request is not to be considered for merging (yet), please
@@ -221,7 +221,7 @@ In general, all pull requests must:
   - follow code style guidelines;
 
 Patches that change ORO consensus rules are considerably more involved than
-normal because they affect the entire orosystem and so must be preceded by
+normal because they affect the entire ecosystem and so must be preceded by
 extensive discussions and clear detailing. While each case will be different,
 one should be prepared to expend more time and effort than for other kinds of
 patches because of increased peer review and consensus building requirements.

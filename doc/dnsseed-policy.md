@@ -44,7 +44,7 @@ related to the DNS seed operation.
 If these expectations cannot be satisfied the operator should
 discontinue providing services and contact the active ORO
 Core development team as well as posting on the
-[ORO Forum](https://forum.oro.cm).
+[ORO Forum](https://forum.oro.exchange).
 
 Behavior outside of these expectations may be reasonable in some
 situations but should be discussed in public in advance.

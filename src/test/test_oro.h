@@ -5,9 +5,10 @@
 #ifndef ORO_TEST_TEST_ORO_H
 #define ORO_TEST_TEST_ORO_H
 
+#include "fs.h"
+#include "scheduler.h"
 #include "txdb.h"
 
-#include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
 
 extern uint256 insecure_rand_seed;
@@ -42,14 +43,81 @@ struct BasicTestingSetup {
  * Included are data directory, coins database, script check threads
  * and wallet (if enabled) setup.
  */
+class CConnman;
 struct TestingSetup: public BasicTestingSetup {
     CCoinsViewDB *pcoinsdbview;
-    boost::filesystem::path pathTemp;
+    fs::path pathTemp;
     boost::thread_group threadGroup;
+    CConnman* connman;
+    CScheduler scheduler;
     ECCVerifyHandle globalVerifyHandle;
 
     TestingSetup();
     ~TestingSetup();
 };
+
+class CBlock;
+struct CMutableTransaction;
+class CScript;
+
+struct TestChainSetup : public TestingSetup
+{
+    TestChainSetup(int blockCount);
+    ~TestChainSetup();
+
+    // Create a new block with just given transactions, coinbase paying to
+    // scriptPubKey, and try to add it to the current chain.
+    CBlock CreateAndProcessBlock(const std::vector<CMutableTransaction>& txns, const CScript& scriptPubKey);
+    CBlock CreateAndProcessBlock(const std::vector<CMutableTransaction>& txns, const CKey& scriptKey);
+    CBlock CreateBlock(const std::vector<CMutableTransaction>& txns, const CScript& scriptPubKey);
+    CBlock CreateBlock(const std::vector<CMutableTransaction>& txns, const CKey& scriptKey);
+
+    std::vector<CTransaction> coinbaseTxns; // For convenience, coinbase transactions
+    CKey coinbaseKey; // private/public key needed to spend coinbase transactions
+};
+
+// Testing fixture that pre-creates a 100-block REGTEST-mode blockchain
+struct TestChain100Setup : public TestChainSetup {
+    TestChain100Setup() : TestChainSetup(100) {}
+};
+
+// Testing fixture that pre-creates a 400-block REGTEST-mode blockchain
+// all 400 blocks are PoW. PoS starts at height 500
+struct TestChain400Setup : public TestChainSetup {
+    TestChain400Setup() : TestChainSetup(400) {}
+};
+
+class CTxMemPoolEntry;
+class CTxMemPool;
+
+struct TestMemPoolEntryHelper
+{
+    // Default values
+    CAmount nFee;
+    int64_t nTime;
+    double dPriority;
+    unsigned int nHeight;
+    bool hadNoDependencies;
+    bool spendsCoinbaseOrCoinstake;
+    unsigned int sigOpCount;
+
+    TestMemPoolEntryHelper() :
+        nFee(0), nTime(0), dPriority(0.0), nHeight(1),
+        hadNoDependencies(false), spendsCoinbaseOrCoinstake(false), sigOpCount(1) { }
+
+    CTxMemPoolEntry FromTx(CMutableTransaction &tx, CTxMemPool *pool = NULL);
+
+    // Change the default value
+    TestMemPoolEntryHelper &Fee(CAmount _fee) { nFee = _fee; return *this; }
+    TestMemPoolEntryHelper &Time(int64_t _time) { nTime = _time; return *this; }
+    TestMemPoolEntryHelper &Priority(double _priority) { dPriority = _priority; return *this; }
+    TestMemPoolEntryHelper &Height(unsigned int _height) { nHeight = _height; return *this; }
+    TestMemPoolEntryHelper &HadNoDependencies(bool _hnd) { hadNoDependencies = _hnd; return *this; }
+    TestMemPoolEntryHelper &SpendsCoinbaseOrCoinstake(bool _flag) { spendsCoinbaseOrCoinstake = _flag; return *this; }
+    TestMemPoolEntryHelper &SigOps(unsigned int _sigops) { sigOpCount = _sigops; return *this; }
+};
+
+// define an implicit conversion here so that uint256 may be used directly in BOOST_CHECK_*
+std::ostream& operator<<(std::ostream& os, const uint256& num);
 
 #endif

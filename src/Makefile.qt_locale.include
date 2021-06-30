@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/oro_de.ts \
+  qt/locale/oro_en.ts \
+  qt/locale/oro_en_US.ts \
+  qt/locale/oro_es.ts \
+  qt/locale/oro_es_ES.ts \
+  qt/locale/oro_fr_FR.ts \
+  qt/locale/oro_hr_HR.ts \
+  qt/locale/oro_it.ts \
+  qt/locale/oro_ko_KR.ts \
+  qt/locale/oro_nl.ts \
+  qt/locale/oro_pl.ts \
+  qt/locale/oro_ru.ts \
+  qt/locale/oro_tr.ts \
+  qt/locale/oro_zh_CN.ts

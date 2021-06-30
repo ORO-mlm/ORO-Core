@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=ORO Core
+Comment=ORO Core QT main network
+GenericName=ORO Digital Currency QT client main network
+Exec=oro-core.qt %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/oro.png
+MimeType=x-scheme-handler/oro;
+Categories=X-Office;X-Finance;
+Keywords=internet;oro;zoro;oro;core;wallet;qt;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

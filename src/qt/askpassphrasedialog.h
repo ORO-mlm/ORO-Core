@@ -44,8 +44,6 @@ public:
         ToggleLock,     /** Toggle wallet lock state */
         ChangePass,     /** Change passphrase */
         Send_ORO,       /** Send ORO */
-        Send_zORO,      /** Send zORO */
-        Mint_zORO,      /** Mint zORO */
         BIP_38,         /** BIP38 menu */
         Multi_Sig,      /** Multi-Signature dialog */
         Sign_Message,   /** Sign/verify message dialog */
@@ -66,13 +64,14 @@ private:
     bool fCapsLock;
     SecureString newpassCache = "";
 
+    void updateWarningsLabel();
     void run(int type) override;
     void onError(QString error, int type) override;
     QCheckBox *btnWatch;
 
     void initWatch(QWidget *parent);
 
-private slots:
+private Q_SLOTS:
     void onWatchClicked();
     void textChanged();
     void warningMessage();

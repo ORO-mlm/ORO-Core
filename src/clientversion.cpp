@@ -45,8 +45,8 @@ const std::string CLIENT_NAME("ORO Core");
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "b005d840a8e694a9e0726131a580fc72dcab2b53"
-#define GIT_COMMIT_DATE "Sun, 15 Dec 2019 03:51:34 -0800"
+#define GIT_COMMIT_ID "e92cc732a96a567b66c0ce665a03496e15b2702d"
+#define GIT_COMMIT_DATE "Sat, 24 Apr 2021 09:57:39 -0300"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \

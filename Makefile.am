@@ -7,6 +7,7 @@ SUBDIRS = src
 if ENABLE_MAN
 SUBDIRS += doc/man
 endif
+SUBDIRS += params
 .PHONY: deploy FORCE
 
 export PYTHONPATH
@@ -48,6 +49,13 @@ DIST_SHARE = \
            $(top_srcdir)/share/genbuild.sh \
            $(top_srcdir)/share/rpcauth
 
+DIST_CARGO = \
+           $(top_srcdir)/.cargo/config.offline \
+           $(top_srcdir)/Cargo.lock \
+           $(top_srcdir)/Cargo.toml \
+           $(top_srcdir)/rust-toolchain \
+           $(top_srcdir)/params/install-params.sh
+
 BIN_CHECKS=$(top_srcdir)/contrib/devtools/symbol-check.py \
            $(top_srcdir)/contrib/devtools/security-check.py
 
@@ -65,6 +73,9 @@ OSX_PACKAGING = $(OSX_DEPLOY_SCRIPT) $(OSX_FANCY_PLIST) $(OSX_INSTALLER_ICONS) \
   $(OSX_DSSTORE_GEN) \
   $(top_srcdir)/contrib/macdeploy/detached-sig-apply.sh \
   $(top_srcdir)/contrib/macdeploy/detached-sig-create.sh
+
+SPEND_PARAMS = $(top_srcdir)/params/sapling-spend.params
+OUTPUT_PARAMS = $(top_srcdir)/params/sapling-output.params
 
 COVERAGE_INFO = baseline.info \
   test_oro_filtered.info total_coverage.info \
@@ -107,9 +118,18 @@ $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings:
 	$(MKDIR_P) $(@D)
 	echo '{	CFBundleDisplayName = "$(PACKAGE_NAME)"; CFBundleName = "$(PACKAGE_NAME)"; }' > $@
 
+$(OSX_APP)/Contents/Resources/sapling-spend.params: $(SPEND_PARAMS)
+	$(MKDIR_P) $(@D)
+	$(INSTALL_DATA) $< $@
+
+$(OSX_APP)/Contents/Resources/sapling-output.params: $(OUTPUT_PARAMS)
+	$(MKDIR_P) $(@D)
+	$(INSTALL_DATA) $< $@
+
 OSX_APP_BUILT=$(OSX_APP)/Contents/PkgInfo $(OSX_APP)/Contents/Resources/empty.lproj \
   $(OSX_APP)/Contents/Resources/bitcoin.icns $(OSX_APP)/Contents/Info.plist \
-  $(OSX_APP)/Contents/MacOS/ORO-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings
+  $(OSX_APP)/Contents/MacOS/ORO-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings \
+  $(OSX_APP)/Contents/Resources/sapling-spend.params $(OSX_APP)/Contents/Resources/sapling-output.params
 
 osx_volname:
 	echo $(OSX_VOLNAME) >$@
@@ -173,7 +193,7 @@ $(BITCOIN_CLI_BIN): FORCE
 	$(MAKE) -C src $(@F)
 
 if USE_LCOV
-LCOV_FILTER_PATTERN=-p "/usr/include/" -p "/usr/lib/" -p "src/leveldb/" -p "src/univalue" -p "src/secp256k1"
+LCOV_FILTER_PATTERN=-p "/usr/include/" -p "/usr/lib/" -p "src/leveldb/" -p "src/crc32c/" -p "src/univalue" -p "src/secp256k1"
 
 baseline.info:
 	$(LCOV) -c -i -d $(abs_builddir)/src -o $@
@@ -220,7 +240,7 @@ endif
 
 dist_noinst_SCRIPTS = autogen.sh
 
-EXTRA_DIST = $(DIST_SHARE) $(DIST_CONTRIB) $(DIST_DOCS) $(WINDOWS_PACKAGING) $(LINUX_PACKAGING) $(OSX_PACKAGING) $(BIN_CHECKS)
+EXTRA_DIST = $(DIST_SHARE) $(DIST_CONTRIB) $(DIST_DOCS) $(DIST_CARGO) $(WINDOWS_PACKAGING) $(LINUX_PACKAGING) $(OSX_PACKAGING) $(BIN_CHECKS)
 
 EXTRA_DIST += \
     test/functional
@@ -245,6 +265,7 @@ EXTRA_DIST += \
     test/util/data/txcreatescript1.json \
     test/util/data/txcreatesign.hex \
     test/util/data/txcreatesign.json \
+    test/util/data/pre_hd_wallet.dat \
     test/util/rpcauth-test.py
 
 CLEANFILES = $(OSX_DMG) $(BITCOIN_WIN_INSTALLER)

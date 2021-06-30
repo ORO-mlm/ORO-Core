@@ -28,7 +28,7 @@ Build-Depends: debhelper,
  libzmq3-dev,
  dh-systemd
 Standards-Version: 3.9.2
-Homepage: http://www.oro.cm
+Homepage: http://www.oro.exchange
 Vcs-Git: git://github.com/ORO-Project/ORO.git
 Vcs-Browser: http://github.com/ORO-Project/ORO
 
@@ -36,14 +36,14 @@ Package: orod
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - daemon
- ORO is a free open source peer-to-peer electronic cash system that
+ ORO is a free, open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
  Full transaction history is stored locally at each client.  This
- requires 10+ GB of space, slowly growing.
+ requires 18.5+ GB of space, slowly growing.
  .
  This package provides the daemon, orod, and the CLI tool
  oro-cli to interact with the daemon.
@@ -52,13 +52,13 @@ Package: oro-qt
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - Qt GUI
- ORO is a free open source peer-to-peer electronic cash system that
+ ORO is a free, open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
  Full transaction history is stored locally at each client.  This
- requires 10+ GB of space, slowly growing.
+ requires 18.5+ GB of space, slowly growing.
  .
  This package provides Oro-Qt, a GUI for ORO based on Qt.
