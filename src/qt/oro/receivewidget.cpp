@@ -1,4 +1,5 @@
-// Copyright (c) 2019-2020 The ORO developers
+// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2021- The ORO developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -192,7 +193,7 @@ void ReceiveWidget::updateQr(QString& address)
     ui->labelQrImg->setText("");
 
     QString error;
-    QColor qrColor("#4d3b2d");
+    QColor qrColor("#345062");
     QPixmap pixmap = encodeToQr(uri, error, qrColor);
     if (!pixmap.isNull()) {
         qrImage = &pixmap;

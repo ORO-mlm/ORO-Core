@@ -1,5 +1,6 @@
 # Copyright (c) 2018-2019 The Ion developers
-# Copyright (c) 2019 The ORO developers
+# Copyright (c) 2019 The PIVX developers
+# Copyright (c) 2021 The ORO developers
 name: oro-core
 base: core18
 version: 5.0.99

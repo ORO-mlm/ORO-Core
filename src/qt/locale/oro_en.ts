@@ -4991,7 +4991,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style=&apos;color: #ffaf88&apos; href=&apos;https://discord.oro.exchange&apos;&gt;
+                           &lt;a style=&apos;color: #7fccfd&apos; href=&apos;https://discord.oro.exchange&apos;&gt;
                            #support in our Discord&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>

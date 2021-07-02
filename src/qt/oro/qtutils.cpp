@@ -1,4 +1,5 @@
-// Copyright (c) 2019-2020 The ORO developers
+// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2021- The ORO developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -232,7 +233,7 @@ QColor getRowColor(bool isLightTheme, bool isHovered, bool isSelected)
 {
     if (isLightTheme) {
         if (isSelected) {
-            return QColor("#25ffaf88");
+            return QColor("#51aee8");
         } else if (isHovered) {
             return QColor("#25bababa");
         } else {
@@ -240,11 +241,11 @@ QColor getRowColor(bool isLightTheme, bool isHovered, bool isSelected)
         }
     } else {
         if (isSelected) {
-            return QColor("#25ffaf88");
+            return QColor("#51aee8");
         } else if (isHovered) {
             return QColor("#25bababa");
         } else {
-            return QColor("#16100b");
+            return QColor("#213542");
         }
     }
 }

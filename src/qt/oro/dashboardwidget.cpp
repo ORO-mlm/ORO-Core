@@ -1,4 +1,5 @@
-// Copyright (c) 2019-2020 The ORO developers
+// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2021- The ORO developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -469,7 +470,7 @@ void DashboardWidget::changeChartColors()
     } else {
         gridY = QColor("#40ffffff");
         axisY->setGridLineColor(gridY);
-        gridLineColorX = QColor(22,16,11);
+        gridLineColorX = QColor("#173243");
         linePenColorY =  gridLineColorX;
         backgroundColor = linePenColorY;
     }
@@ -666,8 +667,8 @@ void DashboardWidget::onChartRefreshed()
     // init sets
     set0 = new QBarSet(CURRENCY_UNIT.c_str());
     set1 = new QBarSet("z" + QString(CURRENCY_UNIT.c_str()));
-    set0->setColor(QColor(125,89,75));
-    set1->setColor(QColor(255,175,136));
+    set0->setColor(QColor("#213542"));
+    set1->setColor(QColor("#7fccfd"));
 
     if (!series) {
         series = new QBarSeries();

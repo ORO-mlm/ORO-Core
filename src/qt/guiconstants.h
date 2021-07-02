@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2018 The ORO developers
+// Copyright (c) 2015-2018 The PIVX developers
+// Copyright (c) 2021- The ORO developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -22,7 +23,7 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 #define STYLE_INVALID "background:#FF8080"
 
 /* Transaction list -- unconfirmed transaction */
-#define COLOR_UNCONFIRMED QColor(134, 111, 76)
+#define COLOR_UNCONFIRMED QColor("#0470b5")
 /* Transaction list -- negative amount */
 #define COLOR_NEGATIVE QColor(206, 0, 188)
 /* Transaction list -- bare address (without label) */
@@ -36,7 +37,7 @@ static const bool DEFAULT_SPLASHSCREEN = true;
 /* Transaction list -- TX status decoration - orphan (Light Gray #D3D3D3) */
 #define COLOR_ORPHAN QColor(211, 211, 211)
 /* Transaction list -- TX status decoration - stake (BlueViolet #e2922b) */
-#define COLOR_STAKE QColor(226,146,43)
+#define COLOR_STAKE QColor("#7fccfd")
 /* Tooltips longer than this (in characters) are converted into rich text,
    so that they can be word-wrapped.
  */

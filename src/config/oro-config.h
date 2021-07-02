@@ -21,7 +21,7 @@
 #define CLIENT_VERSION_MINOR 1
 
 /* Build revision */
-#define CLIENT_VERSION_REVISION 0
+#define CLIENT_VERSION_REVISION 1
 
 /* Version is release */
 #define COPYRIGHT_YEAR 2021
@@ -30,7 +30,7 @@
 #define ENABLE_AVX2 1
 
 /* Define to 1 to enable mining rpc commands */
-#define ENABLE_MINING_RPC 1
+/* #undef ENABLE_MINING_RPC */
 
 /* Define this symbol to build code that uses SHA-NI intrinsics */
 #define ENABLE_SHANI 1
@@ -343,7 +343,7 @@
 #define PACKAGE_NAME "ORO Core"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "ORO Core 1.1.0"
+#define PACKAGE_STRING "ORO Core 1.1.1"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "oro"
@@ -352,7 +352,7 @@
 #define PACKAGE_URL "https://oro.exchange/"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.1.0"
+#define PACKAGE_VERSION "1.1.1"
 
 /* Path to the zk params dir during unit tests on windows */
 #define PARAMS_DIR ""
