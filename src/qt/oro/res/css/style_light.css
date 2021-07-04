@@ -2670,7 +2670,7 @@ QPushButton[cssClass="btn-settings-options"] {
 }
 
 QPushButton[cssClass="btn-settings-options"]:checked {
-    background-color:#9f8e7b;
+    background-color:#85acc4;
     border:none;
     font-size:20px;
     color: #FFFFFF;
