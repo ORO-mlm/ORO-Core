@@ -30,7 +30,7 @@
 #define ENABLE_AVX2 1
 
 /* Define to 1 to enable mining rpc commands */
-/* #undef ENABLE_MINING_RPC */
+#define ENABLE_MINING_RPC 1
 
 /* Define this symbol to build code that uses SHA-NI intrinsics */
 #define ENABLE_SHANI 1

@@ -69,6 +69,7 @@ void SettingsWalletOptionsWidget::onResetClicked(){
 }
 
 void SettingsWalletOptionsWidget::setMapper(QDataWidgetMapper *mapper){
+    mapper->addMapping(ui->radioButtonStakingActive, OptionsModel::StakingActive);
     mapper->addMapping(ui->radioButtonSpend, OptionsModel::SpendZeroConfChange);
     mapper->addMapping(ui->spinBoxStakeSplitThreshold, OptionsModel::StakeSplitThreshold);
 

@@ -56,7 +56,7 @@ void CChainParams::UpdateNetworkUpgradeParameters(Consensus::UpgradeIndex idx, i
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "Oro Genesis Block - May 26, 2021";
+    const char* pszTimestamp = "Oro Genesis Block - Jul 07, 2021";
     const CScript genesisOutputScript = CScript() << ParseHex("04004826f1b876bbe409e5caa74114ca99403a4e754ec213aeadab5f17ba2ab28d16065b119a2f57c3dfd495f92b3b746263a5667aa8d51d8cec9efc60f966cdbe") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -72,9 +72,9 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
  * + Contains no strange transactions
  */
 static Checkpoints::MapCheckpoints mapCheckpoints = {
-    { 0, uint256S("00000b704df0e3fa4a8c6648e523703e178510cacf6828a6aeb159ba82e4a2b6")},
-    { 6900, uint256S("345c141975eed94b9fbdf429b507be4a20d09119e15e30a389c773fdf2891671")},
-    { 9930, uint256S("0d8f5da53764a7ea0485a75326264453679e8eada608ccbfb780a242cad96d1b")},
+    { 0, uint256S("00000d7d6dcaecfdec619157642a912dfe2fabe053b9593212ce517a45270d01")},
+    // { 6900, uint256S("345c141975eed94b9fbdf429b507be4a20d09119e15e30a389c773fdf2891671")},
+    // { 9930, uint256S("0d8f5da53764a7ea0485a75326264453679e8eada608ccbfb780a242cad96d1b")},
 };
 
 static const Checkpoints::CCheckpointData data = {
@@ -110,11 +110,11 @@ public:
     {
         strNetworkID = "main";
 
-        genesis = CreateGenesisBlock(1622000000, 2561269, 0x1e0ffff0, 1, 0 * COIN);
+        genesis = CreateGenesisBlock(1622000000, 1397661, 0x1e0ffff0, 1, 0 * COIN);
         
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000b704df0e3fa4a8c6648e523703e178510cacf6828a6aeb159ba82e4a2b6"));
-        assert(genesis.hashMerkleRoot == uint256S("0x2027696845c12cb278b2bf26c208c750f2e0bf8271df94d4f68fa082b935bfa7"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000d7d6dcaecfdec619157642a912dfe2fabe053b9593212ce517a45270d01"));
+        assert(genesis.hashMerkleRoot == uint256S("0x39df345f7156ca198cbc12f38226afe289566f1047ecb154693e37a0cce83f4b"));
 
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.powLimit   = ~UINT256_ZERO >> 20;   // ORO starting difficulty is 1 / 2^12
@@ -172,14 +172,14 @@ public:
                 Consensus::NetworkUpgrade::ALWAYS_ACTIVE;
         consensus.vUpgrades[Consensus::UPGRADE_TESTDUMMY].nActivationHeight =
                 Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
-        consensus.vUpgrades[Consensus::UPGRADE_POS].nActivationHeight           = 1001;
-        consensus.vUpgrades[Consensus::UPGRADE_POS_V2].nActivationHeight        = 1001;
+        consensus.vUpgrades[Consensus::UPGRADE_POS].nActivationHeight           = 2002;
+        consensus.vUpgrades[Consensus::UPGRADE_POS_V2].nActivationHeight        = 2002;
         consensus.vUpgrades[Consensus::UPGRADE_ZC].nActivationHeight            = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_ZC_V2].nActivationHeight         = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_BIP65].nActivationHeight         = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_ZC_PUBLIC].nActivationHeight     = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_V3_4].nActivationHeight          = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
-        consensus.vUpgrades[Consensus::UPGRADE_V4_0].nActivationHeight          = 1001;
+        consensus.vUpgrades[Consensus::UPGRADE_V4_0].nActivationHeight          = 2002;
         consensus.vUpgrades[Consensus::UPGRADE_V5_0].nActivationHeight          = Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
 
         consensus.vUpgrades[Consensus::UPGRADE_ZC].hashActivationBlock =
@@ -261,10 +261,10 @@ public:
     {
         strNetworkID = "test";
 
-        genesis = CreateGenesisBlock(1622000001, 2736526, 0x1e0ffff0, 1, 0 * COIN);
+        genesis = CreateGenesisBlock(1622000001, 1724848, 0x1e0ffff0, 1, 0 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000b17235667ef33c08d78c7b9e99b7ce115a0bc75ac3e61185d5e98e5eca3"));
-        assert(genesis.hashMerkleRoot == uint256S("0x2027696845c12cb278b2bf26c208c750f2e0bf8271df94d4f68fa082b935bfa7"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000da4b72540c3493828519c768de0a251da8b9a13f8b8a7264ebb5ee07cc5"));
+        assert(genesis.hashMerkleRoot == uint256S("0x39df345f7156ca198cbc12f38226afe289566f1047ecb154693e37a0cce83f4b"));
 
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.powLimit   = ~UINT256_ZERO >> 20;   // ORO starting difficulty is 1 / 2^12
@@ -395,10 +395,10 @@ public:
     {
         strNetworkID = "regtest";
 
-        genesis = CreateGenesisBlock(1622000002, 2118614, 0x1e0ffff0, 1, 0 * COIN);
+        genesis = CreateGenesisBlock(1622000002, 57821, 0x1e0ffff0, 1, 0 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000db5022891021425598a078042cd44e58e398f6be98aa070c60dc08120c2"));
-        assert(genesis.hashMerkleRoot == uint256S("0x2027696845c12cb278b2bf26c208c750f2e0bf8271df94d4f68fa082b935bfa7"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000080f7b188f0e0e0628fbbf498c104b55239fa785f8b31bcf6b66d78180ef"));
+        assert(genesis.hashMerkleRoot == uint256S("0x39df345f7156ca198cbc12f38226afe289566f1047ecb154693e37a0cce83f4b"));
 
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.powLimit   = ~UINT256_ZERO >> 20;   // ORO starting difficulty is 1 / 2^12

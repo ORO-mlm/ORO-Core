@@ -54,6 +54,7 @@ extern CFeeRate payTxFee;
 extern CAmount maxTxFee;
 extern unsigned int nTxConfirmTarget;
 extern bool bSpendZeroConfChange;
+extern bool bStakingActive;
 extern bool bdisableSystemnotifications;
 extern bool fPayAtLeastCustomFee;
 

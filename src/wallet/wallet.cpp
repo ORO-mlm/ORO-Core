@@ -36,6 +36,7 @@ unsigned int nTxConfirmTarget = 1;
 bool bdisableSystemnotifications = false; // Those bubbles can be annoying and slow down the UI when you get lots of trx
 bool fPayAtLeastCustomFee = true;
 bool bSpendZeroConfChange = DEFAULT_SPEND_ZEROCONF_CHANGE;
+bool bStakingActive = DEFAULT_STAKING;
 
 const char * DEFAULT_WALLET_DAT = "wallet.dat";
 
@@ -671,6 +672,7 @@ bool CWallet::ParameterInteraction()
     }
     nTxConfirmTarget = gArgs.GetArg("-txconfirmtarget", 1);
     bSpendZeroConfChange = gArgs.GetBoolArg("-spendzeroconfchange", DEFAULT_SPEND_ZEROCONF_CHANGE);
+    bStakingActive = gArgs.GetBoolArg("-staking", DEFAULT_STAKING);
     bdisableSystemnotifications = gArgs.GetBoolArg("-disablesystemnotifications", false);
 
     return true;

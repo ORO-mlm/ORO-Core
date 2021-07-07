@@ -784,10 +784,10 @@ CAmount GetBlockValue(int nHeight)
     // Mainnet/Testnet block reward reduction schedule
     int64_t nSubsidy = 0;
     if (nHeight == 1) {
-        nSubsidy = 1125899806842624 * COIN;
-    } else if (nHeight > 1 && nHeight <= 1000) {
-        nSubsidy = 100000 * COIN;
-    } else if (nHeight > 1000 && nHeight <= 8388000) { // 6 * 100 months later
+        nSubsidy = 1125899905842624 * COIN;
+    } else if (nHeight > 1 && nHeight <= 2001) {
+        nSubsidy = 500 * COIN;
+    } else if (nHeight > 2001 && nHeight <= 8388000) { // 6 * 100 months later
         nSubsidy = 0.001 * COIN;
     } else
         nSubsidy = 0 * COIN;

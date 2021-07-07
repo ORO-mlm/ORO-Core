@@ -127,6 +127,12 @@ void OptionsModel::setWalletDefaultOptions(QSettings& settings, bool reset)
         settings.setValue("bSpendZeroConfChange", false);
     if (!gArgs.SoftSetBoolArg("-spendzeroconfchange", settings.value("bSpendZeroConfChange").toBool()))
         addOverriddenOption("-spendzeroconfchange");
+
+    if (!settings.contains("bStakingActive") || reset)
+        settings.setValue("bStakingActive", false);
+    if (!gArgs.SoftSetBoolArg("-staking", settings.value("bStakingActive").toBool()))
+        addOverriddenOption("-staking");
+
     if (reset) {
         setStakeSplitThreshold(CWallet::DEFAULT_STAKE_SPLIT_THRESHOLD);
         setUseCustomFee(false);
@@ -260,6 +266,8 @@ QVariant OptionsModel::data(const QModelIndex& index, int role) const
 #ifdef ENABLE_WALLET
         case SpendZeroConfChange:
             return settings.value("bSpendZeroConfChange");
+        case StakingActive:
+            return settings.value("bStakingActive");
         case ShowMasternodesTab:
             return settings.value("fShowMasternodesTab");
         case StakeSplitThreshold:
@@ -367,6 +375,12 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
         case SpendZeroConfChange:
             if (settings.value("bSpendZeroConfChange") != value) {
                 settings.setValue("bSpendZeroConfChange", value);
+                setRestartRequired(true);
+            }
+            break;
+        case StakingActive:
+            if (settings.value("bStakingActive") != value) {
+                settings.setValue("bStakingActive", value);
                 setRestartRequired(true);
             }
             break;
