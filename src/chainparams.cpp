@@ -74,7 +74,7 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 static Checkpoints::MapCheckpoints mapCheckpoints = {
     { 0, uint256S("00000d7d6dcaecfdec619157642a912dfe2fabe053b9593212ce517a45270d01")},
     { 100, uint256S("000000ac10f9a81d89c7e9aad88826b378418eeecadbc3157a506796588dcaab")},
-    // { 9930, uint256S("0d8f5da53764a7ea0485a75326264453679e8eada608ccbfb780a242cad96d1b")},
+    { 8000, uint256S("5bd8b91e173b8193325f69d84fd375c892bf9f86fd5765fa7087e6be1b9f791c")},
 };
 
 static const Checkpoints::CCheckpointData data = {
